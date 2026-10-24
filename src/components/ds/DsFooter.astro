@@ -74,9 +74,9 @@ const themes = [
         </p>
       </div>
 
-      <div role="group" aria-label="Tema" class="inline-flex rounded-full p-0.5 hair self-start">
+      <div role="group" aria-label="Tema" class="inline-flex rounded-none p-0.5 hair self-start">
         {themes.map((t) => (
-          <button type="button" data-theme-set={t.id} aria-pressed="false" class="ds-theme h-8 px-3 rounded-full text-[13px] font-medium text-fg-muted">{t.label}</button>
+          <button type="button" data-theme-set={t.id} aria-pressed="false" class="ds-theme h-8 px-3 rounded-none text-[13px] font-medium text-fg-muted">{t.label}</button>
         ))}
       </div>
     </div>
