@@ -8,12 +8,13 @@ import geistMono from '../../node_modules/geist/dist/fonts/geist-mono/GeistMono-
 export interface Props {
   title: string;
   description?: string;
+  lang?: string;
 }
-const { title, description } = Astro.props;
+const { title, description, lang = 'es-AR' } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es-AR">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
