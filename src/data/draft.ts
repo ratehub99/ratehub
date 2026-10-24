@@ -39,3 +39,5 @@ export const steps: Step[] = [
     missing: 'FALTA: qué incluye y cómo se contrata',
   },
 ];
+
+export const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;

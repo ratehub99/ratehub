@@ -1,0 +1,58 @@
+---
+// Layout del sistema visual "técnico". Noindex mientras sea propuesta.
+import '../styles/global.css';
+import '../styles/ds.css';
+import geistSans from '../../node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2?url';
+import geistMono from '../../node_modules/geist/dist/fonts/geist-mono/GeistMono-Variable.woff2?url';
+
+export interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" href={geistSans} as="font" type="font/woff2" crossorigin />
+    <style set:html={`
+      @font-face{font-family:'Geist Mono';src:url('${geistMono}') format('woff2');font-weight:100 900;font-display:swap}
+      @font-face{font-family:'Geist';src:url('${geistSans}') format('woff2');font-weight:100 900;font-display:swap}
+    `} />
+    <script is:inline>
+      // Tema antes del primer render. Claro por defecto; "system" sigue al sistema.
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        var t = 'light';
+        try { t = localStorage.getItem('rh-theme') || 'light'; } catch (e) {}
+        var dark = t === 'dark' || (t === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+        d.classList.toggle('dark', dark);
+        d.dataset.theme = t;
+      })();
+    </script>
+  </head>
+  <body class="ds">
+    <div class="eyebrow bg-state-amber-bg text-center px-4 py-2" style="color: var(--amber-fg)">
+      Borrador · generado con IA, pendiente de revisión humana · no es el sitio final
+    </div>
+    <slot />
+    <script>
+      // Entrada al viewport (fade + translateY).
+      const items = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -8% 0px' });
+        items.forEach((el) => io.observe(el));
+      } else {
+        items.forEach((el) => el.classList.add('in'));
+      }
+    </script>
+  </body>
+</html>
