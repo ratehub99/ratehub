@@ -54,8 +54,8 @@
   background: var(--bg);
   color: var(--fg);
   font-family: 'Geist', Inter, system-ui, -apple-system, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 18px;
+  line-height: 28px;
   -webkit-font-smoothing: antialiased;
 }
 
