@@ -1,0 +1,142 @@
+---
+type S = 'ok' | 'warn' | 'idle';
+interface Row { s: S; k: string; v: string }
+interface Tab { id: string; label: string; blurb: string; file: string; rows: Row[] }
+
+// Ilustración de cómo se conectan las piezas. No es un cliente ni tiene cifras.
+const tabs: Tab[] = [
+  {
+    id: 'sitio', label: 'Sitio', blurb: 'Diseño y desarrollo, pensado para el celular.', file: 'sitio.config',
+    rows: [
+      { s: 'ok', k: 'diseño', v: 'adaptado a celular y escritorio' },
+      { s: 'ok', k: 'contacto', v: 'botón de WhatsApp visible' },
+      { s: 'ok', k: 'textos', v: 'claros, sin jerga' },
+      { s: 'idle', k: 'medición', v: 'se conecta en la etapa 2' },
+    ],
+  },
+  {
+    id: 'medicion', label: 'Medición', blurb: 'Saber de dónde llegan tus consultas.', file: 'medicion.log',
+    rows: [
+      { s: 'ok', k: 'evento', v: 'clic en WhatsApp → analytics' },
+      { s: 'ok', k: 'evento', v: 'envío de formulario → analytics' },
+      { s: 'ok', k: 'origen', v: 'de dónde llegó cada consulta' },
+      { s: 'warn', k: 'aviso', v: 'cookies: requiere política y aviso' },
+    ],
+  },
+  {
+    id: 'comercial', label: 'Gestión comercial', blurb: 'Cada consulta con su seguimiento.', file: 'crm.flow',
+    rows: [
+      { s: 'ok', k: 'consulta', v: 'formulario → contacto nuevo en el CRM' },
+      { s: 'ok', k: 'etapa', v: 'nuevo · en conversación · cerrado' },
+      { s: 'warn', k: 'pendiente', v: 'seguimiento sin responder' },
+      { s: 'idle', k: 'email', v: 'secuencia de bienvenida' },
+    ],
+  },
+  {
+    id: 'automatizacion', label: 'Automatización', blurb: 'Menos tareas manuales, más visibilidad.', file: 'automatizaciones.flow',
+    rows: [
+      { s: 'ok', k: 'aviso', v: 'nueva consulta → mensaje al equipo' },
+      { s: 'ok', k: 'tarea', v: 'carga repetida → automática' },
+      { s: 'ok', k: 'tablero', v: 'resumen del negocio en una pantalla' },
+      { s: 'idle', k: 'revisión', v: 'ajustes mensuales' },
+    ],
+  },
+];
+const dot: Record<S, string> = { ok: 'var(--green)', warn: 'var(--amber)', idle: 'var(--fg-subtle)' };
+---
+
+<section id="conectado" class="scroll-mt-16" style="box-shadow: 0 -1px 0 var(--border)">
+  <div class="max-w-[1200px] mx-auto px-4 md:px-6 py-24 md:py-40">
+    <p class="eyebrow mb-6 reveal">Qué hacemos</p>
+    <h2 class="h2 max-w-[16ch] reveal">Primero el sitio. Después, todo lo demás.</h2>
+    <p class="lead max-w-[36ch] mt-6 reveal">El sitio nace conectado a tus datos, tus contactos y tus automatizaciones.</p>
+
+    <div class="mt-16 grid lg:grid-cols-12 gap-6">
+      <!-- Prueba: placeholder hasta tener un caso autorizado -->
+      <div class="lg:col-span-4 rounded-xl p-6 flex flex-col justify-between min-h-[220px] reveal" style="box-shadow: 0 0 0 1px var(--border-strong); background-image: repeating-linear-gradient(135deg, transparent 0 8px, var(--grid-line) 8px 9px)">
+        <p class="eyebrow">Prueba</p>
+        <div>
+          <p class="text-[20px] leading-7 font-medium tracking-tight">Hasta que haya un caso autorizado, la prueba es este sitio.</p>
+          <p class="mt-4">
+            <span class="inline-block rounded px-2 py-1 text-[14px] leading-5 font-medium bg-state-amber-bg" style="color: var(--amber-fg)">
+              [FALTA: caso autorizado — cliente y resultado verificable]
+            </span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Mockup: ventana tipo terminal -->
+      <div class="lg:col-span-8 rounded-xl bg-bg-2 hair overflow-hidden reveal">
+        <div class="flex items-center gap-2 px-4 h-11" style="box-shadow: 0 1px 0 var(--border)">
+          <span class="w-2.5 h-2.5 rounded-full hair-strong"></span>
+          <span class="w-2.5 h-2.5 rounded-full hair-strong"></span>
+          <span class="w-2.5 h-2.5 rounded-full hair-strong"></span>
+          <span id="ds-file" class="ml-3 font-geist-mono text-[13px] text-fg-muted">{tabs[0].file}</span>
+          <span class="ml-auto font-geist-mono text-[12px] text-fg-muted">ejemplo ilustrativo</span>
+        </div>
+        <div class="p-5 md:p-6 min-h-[240px] font-geist-mono text-[14px] leading-7">
+          {tabs.map((t, i) => (
+            <div id={`panel-${t.id}`} role="tabpanel" aria-labelledby={`tab-${t.id}`} hidden={i !== 0}>
+              {t.rows.map((r) => (
+                <div class="flex items-baseline gap-3">
+                  <span class="w-2 h-2 rounded-full shrink-0 translate-y-[-1px]" style={`background:${dot[r.s]}`} aria-hidden="true"></span>
+                  <span class="text-fg-muted w-24 shrink-0">{r.k}</span>
+                  <span>{r.v}</span>
+                  <span class="sr-only">{r.s === 'ok' ? '(listo)' : r.s === 'warn' ? '(atención)' : '(pendiente)'}</span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <div role="tablist" aria-label="Piezas conectadas" class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4 reveal">
+      {tabs.map((t, i) => (
+        <button
+          id={`tab-${t.id}`}
+          role="tab"
+          type="button"
+          aria-selected={i === 0 ? 'true' : 'false'}
+          aria-controls={`panel-${t.id}`}
+          data-file={t.file}
+          class="ds-tab text-left pt-4 group"
+        >
+          <span class="block text-[16px] leading-6 font-medium">{t.label}</span>
+          <span class="block text-[14px] leading-5 text-fg-muted mt-1">{t.blurb}</span>
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ds-tab { box-shadow: 0 -1px 0 var(--border); transition: box-shadow 150ms ease-out, color 150ms ease-out; color: var(--fg-muted); }
+  .ds-tab:hover { color: var(--fg); }
+  .ds-tab[aria-selected='true'] { box-shadow: 0 -2px 0 var(--fg); color: var(--fg); }
+</style>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.ds-tab'));
+  const file = document.getElementById('ds-file');
+  const select = (tab: HTMLButtonElement) => {
+    tabs.forEach((t) => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+      const panel = document.getElementById(t.getAttribute('aria-controls') ?? '');
+      if (panel) panel.hidden = !on;
+    });
+    if (file) file.textContent = tab.dataset.file ?? '';
+  };
+  tabs.forEach((t, i) => {
+    t.tabIndex = i === 0 ? 0 : -1;
+    t.addEventListener('click', () => select(t));
+    t.addEventListener('keydown', (e) => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      select(next);
+      next.focus();
+    });
+  });
+</script>

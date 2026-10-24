@@ -1,12 +1,31 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        geist: ['Geist', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        'geist-mono': ['"Geist Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', 'monospace'],
       },
       colors: {
+        // Tokens del sistema "técnico": valores en src/styles/ds.css (light y dark).
+        bg: 'var(--bg)',
+        'bg-2': 'var(--bg-2)',
+        fg: 'var(--fg)',
+        'fg-muted': 'var(--fg-muted)',
+        'fg-subtle': 'var(--fg-subtle)',
+        line: 'var(--border)',
+        'line-strong': 'var(--border-strong)',
+        state: {
+          blue: 'var(--blue)',
+          green: 'var(--green)',
+          amber: 'var(--amber)',
+          red: 'var(--red)',
+          'blue-bg': 'var(--blue-bg)',
+          'amber-bg': 'var(--amber-bg)',
+        },
         brand: {
           50:  '#f0f4ff',
           100: '#e0eaff',

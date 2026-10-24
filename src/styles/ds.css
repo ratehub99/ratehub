@@ -1,0 +1,134 @@
+/* Sistema visual "técnico": monocromo, bordes de 1px, mucho aire.
+   Light por defecto; dark con la clase .dark en <html>. */
+
+:root {
+  --bg: #ffffff;
+  --bg-2: #fafafa;
+  --fg: #171717;
+  --fg-muted: #4d4d4d;
+  --fg-subtle: #8f8f8f; /* solo decorativo: no cumple AA como texto sobre blanco */
+  --border: #ebebeb;
+  --border-strong: #d4d4d4;
+  --btn-primary-bg: #171717;
+  --btn-primary-bg-hover: #383838;
+  --btn-primary-fg: #ffffff;
+  --btn-secondary-bg: #ffffff;
+  --btn-secondary-bg-hover: #fafafa;
+
+  --blue: #0070f3;
+  --green: #00ab3e;
+  --amber: #ffb200;
+  --red: #f13242;
+  --blue-bg: #ebf5ff;
+  --amber-bg: #fff6dd;
+  --amber-fg: #7a5200;
+
+  --grid-line: rgb(0 0 0 / 0.04);
+  --glow: rgb(0 0 0 / 0.04);
+}
+
+.dark {
+  --bg: #000000;
+  --bg-2: #0a0a0a;
+  --fg: #ededed;
+  --fg-muted: #a1a1a1;
+  --fg-subtle: #737373;
+  --border: #1f1f1f;
+  --border-strong: #2e2e2e;
+  --btn-primary-bg: #ededed;
+  --btn-primary-bg-hover: #d4d4d4;
+  --btn-primary-fg: #0a0a0a;
+  --btn-secondary-bg: #0a0a0a;
+  --btn-secondary-bg-hover: #141414;
+
+  --blue-bg: #06193a;
+  --amber-bg: #2b1d00;
+  --amber-fg: #ffb200;
+
+  --grid-line: rgb(255 255 255 / 0.05);
+  --glow: rgb(255 255 255 / 0.07);
+}
+
+
+.ds {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Geist', Inter, system-ui, -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Bordes como sombra: no mueven el layout. */
+.ds .hair { box-shadow: 0 0 0 1px var(--border); }
+.ds .hair-strong { box-shadow: 0 0 0 1px var(--border-strong); }
+
+.ds *:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Tipografía */
+.ds .h1 {
+  font-weight: 450;
+  letter-spacing: -0.06em;
+  line-height: 1.1;
+  font-size: clamp(2.25rem, 1.2rem + 4.2vw, 4.5rem);
+}
+.ds .h2 {
+  font-weight: 450;
+  letter-spacing: -0.06em;
+  line-height: 1.1;
+  font-size: clamp(2.25rem, 1.8rem + 1.2vw, 3rem);
+}
+.ds .lead { font-size: 24px; line-height: 32px; color: var(--fg-muted); letter-spacing: -0.02em; }
+.ds .eyebrow {
+  font-family: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 14px; line-height: 20px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--fg-muted);
+}
+
+/* Botones: píldora de 40px */
+.ds .btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 40px; padding: 0 20px; border-radius: 9999px;
+  font-size: 16px; font-weight: 500; white-space: nowrap;
+  transition: background-color 150ms ease-out, color 150ms ease-out;
+}
+.ds .btn-primary { background: var(--btn-primary-bg); color: var(--btn-primary-fg); }
+.ds .btn-primary:hover { background: var(--btn-primary-bg-hover); }
+.ds .btn-secondary { background: var(--btn-secondary-bg); color: var(--fg); box-shadow: 0 0 0 1px var(--border-strong); }
+.ds .btn-secondary:hover { background: var(--btn-secondary-bg-hover); }
+.ds .btn-sm { height: 32px; padding: 0 14px; font-size: 14px; }
+
+/* Fondo del hero: grilla de 1px y brillo radial muy tenue */
+.ds .hero-bg {
+  background-image:
+    radial-gradient(ellipse 60% 50% at 50% 0%, var(--glow), transparent 70%),
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 100% 100%, 64px 64px, 64px 64px;
+  background-position: center top;
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+
+/* Marquee */
+.ds .marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+.ds .marquee-track { display: flex; width: max-content; animation: marquee 50s linear infinite; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Entrada al viewport: fade + 8px. Solo se oculta si hay JS. */
+.js .ds .reveal { opacity: 0; transform: translateY(8px); transition: opacity 250ms ease-out, transform 250ms ease-out; }
+.js .ds .reveal.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ds .marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
+  .ds .marquee-track [aria-hidden='true'] { display: none; }
+  .js .ds .reveal { opacity: 1; transform: none; transition: none; }
+  .ds .btn { transition: none; }
+}
