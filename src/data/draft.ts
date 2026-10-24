@@ -1,8 +1,7 @@
 // BORRADOR generado con IA, pendiente de revisión humana.
 // Contenido compartido por las propuestas visuales (/propuestas/*).
 
-// [FALTA: número de WhatsApp en formato internacional sin "+", ej. 5491100000000]
-export const WHATSAPP_NUMBER = '';
+export const WHATSAPP_NUMBER = '5491144169746';
 export const WHATSAPP_MESSAGE = 'Hola, quiero consultar por un sitio web para mi negocio.';
 
 export interface Step {
