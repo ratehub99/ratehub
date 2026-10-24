@@ -1,0 +1,21 @@
+---
+// Contenedor de páginas legales. BORRADOR generado con IA, pendiente de revisión legal (Ley 25.326).
+import Ds from '../../layouts/Ds.astro';
+import DsNav from './DsNav.astro';
+import DsFooter from './DsFooter.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  lang?: string;
+}
+const { title, description, lang = 'es-AR' } = Astro.props;
+---
+
+<Ds title={title} description={description} lang={lang}>
+  <DsNav />
+  <main class="legal max-w-[760px] mx-auto px-4 md:px-6 py-16 md:py-24">
+    <slot />
+  </main>
+  <DsFooter />
+</Ds>

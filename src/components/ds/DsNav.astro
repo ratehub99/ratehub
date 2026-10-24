@@ -2,15 +2,15 @@
 import { whatsappHref } from '../../data/draft';
 
 const links = [
-  { href: '#conectado', label: 'Qué hacemos' },
-  { href: '#camino', label: 'El camino' },
-  { href: '#contacto', label: 'Contacto' },
+  { href: '/#conectado', label: 'Qué hacemos' },
+  { href: '/#camino', label: 'El camino' },
+  { href: '/#contacto', label: 'Contacto' },
 ];
 ---
 
 <header class="sticky top-0 z-50 h-16 bg-bg/80 backdrop-blur-md" style="box-shadow: 0 1px 0 var(--border)">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6 h-full flex items-center gap-8">
-    <a href="/propuestas" class="flex items-center gap-2 font-medium tracking-tight text-[18px]" aria-label="RateHub">
+    <a href="/" class="flex items-center gap-2 font-medium tracking-tight text-[18px]" aria-label="RateHub">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
         <rect x="1" y="1" width="16" height="16" rx="4" stroke="currentColor" stroke-width="1.5" />
         <circle cx="12" cy="6" r="2" fill="currentColor" />
@@ -23,7 +23,7 @@ const links = [
     </nav>
 
     <div class="ml-auto hidden md:flex items-center gap-4">
-      <a href="#camino" class="text-[14px] text-fg-muted hover:text-fg transition-colors duration-150">Ver el camino</a>
+      <a href="/#camino" class="text-[14px] text-fg-muted hover:text-fg transition-colors duration-150">Ver el camino</a>
       <a href={whatsappHref} target="_blank" rel="noopener" class="btn btn-primary btn-sm">WhatsApp</a>
     </div>
 

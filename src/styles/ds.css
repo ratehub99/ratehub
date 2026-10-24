@@ -131,3 +131,20 @@
   .js .ds .reveal { opacity: 1; transform: none; transition: none; }
   .ds .btn { transition: none; }
 }
+
+/* Anclas: que el header sticky no tape el título. */
+.ds [id] { scroll-margin-top: 88px; }
+
+/* Páginas legales (borrador) */
+.ds .legal h1 { font-weight: 450; letter-spacing: -0.04em; line-height: 1.1; font-size: clamp(2rem, 1.5rem + 2vw, 3rem); }
+.ds .legal h2 { font-weight: 500; letter-spacing: -0.02em; font-size: 24px; line-height: 32px; margin-top: 48px; margin-bottom: 12px; }
+.ds .legal p, .ds .legal li { color: var(--fg-muted); }
+.ds .legal p { margin-top: 12px; }
+.ds .legal ul { margin-top: 12px; padding-left: 20px; list-style: disc; }
+.ds .legal li { margin-top: 6px; }
+.ds .legal strong { color: var(--fg); font-weight: 500; }
+.ds .legal a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+.ds .legal .fx {
+  display: inline-block; padding: 0 6px; font-size: 15px; line-height: 24px; font-weight: 500;
+  background: var(--amber-bg); color: var(--amber-fg);
+}
