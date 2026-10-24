@@ -1,0 +1,64 @@
+---
+// Propuesta 2 (alternativa): "Estudio con carácter" (A pura). BORRADOR generado con IA.
+import Draft from '../../layouts/Draft.astro';
+import WhatsAppCta from '../../components/draft/WhatsAppCta.astro';
+import { steps } from '../../data/draft';
+---
+
+<Draft title="Propuesta 2 · Estudio con carácter — RateHub" bodyClass="bg-[#0D0D0D] text-[#F5F5F0] font-sans-draft text-lg leading-relaxed antialiased">
+  <header class="max-w-7xl mx-auto px-5 sm:px-10 py-6 flex items-center justify-between">
+    <a href="/propuestas" class="text-xl font-extrabold tracking-tight">RateHub<span class="text-[#D4FF3F]">.</span></a>
+    <WhatsAppCta
+      label="WhatsApp"
+      class="hidden sm:inline-flex items-center gap-2 min-h-[48px] px-5 rounded-full border-2 border-[#D4FF3F] text-[#D4FF3F] font-bold hover:bg-[#D4FF3F] hover:text-black transition-colors"
+    />
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="max-w-7xl mx-auto px-5 sm:px-10 pt-14 pb-24 sm:pt-24 sm:pb-36">
+      <p class="text-base font-semibold text-[#D4FF3F] mb-8">Estudio de diseño y desarrollo web · Argentina</p>
+      <h1 class="font-extrabold tracking-[-0.04em] leading-[0.95] text-[clamp(3rem,10.5vw,8.5rem)] mb-10">
+        Primero el sitio.<br />
+        <span class="text-[#D4FF3F]">Después, todo lo demás.</span>
+      </h1>
+      <div class="grid md:grid-cols-[1fr_auto] gap-10 items-end">
+        <p class="text-xl sm:text-2xl text-[#D6D6D0] max-w-2xl">
+          Diseño y marketing con base técnica en datos. Tu sitio nace conectado a métricas, contactos y automatizaciones.
+        </p>
+        <WhatsAppCta
+          class="inline-flex items-center justify-center gap-3 min-h-[64px] px-10 rounded-full bg-[#D4FF3F] hover:bg-white text-black text-xl font-bold transition-colors focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-white"
+        />
+      </div>
+    </section>
+
+    <!-- SERVICIOS: escalera como camino -->
+    <section class="border-t border-white/20">
+      <div class="max-w-7xl mx-auto px-5 sm:px-10 py-20 sm:py-28">
+        <h2 class="text-sm font-bold tracking-widest uppercase text-[#D4FF3F] mb-12">El camino · 5 pasos</h2>
+        <ol>
+          {steps.map((s, i) => (
+            <li class="grid sm:grid-cols-[7rem_1fr_1.2fr] gap-x-8 gap-y-3 py-9 border-b border-white/20 items-baseline">
+              <span class="text-6xl sm:text-7xl font-extrabold tracking-tighter text-[#D4FF3F] leading-none" aria-hidden="true">0{s.n}</span>
+              <h3 class="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+                <span class="sr-only">Paso {s.n}: </span>{s.title}
+              </h3>
+              <div>
+                <p class="text-xl text-[#D6D6D0]">{s.desc}</p>
+                {s.missing && (
+                  <p class="mt-3 inline-block rounded bg-yellow-300 px-2 py-1 text-base font-semibold text-black">[{s.missing}]</p>
+                )}
+                {i < steps.length - 1 && <p class="mt-4 text-base font-semibold text-[#D4FF3F]" aria-hidden="true">↓ y después</p>}
+              </div>
+            </li>
+          ))}
+        </ol>
+        <div class="mt-16">
+          <WhatsAppCta
+            class="inline-flex items-center justify-center gap-3 min-h-[64px] px-10 rounded-full bg-[#D4FF3F] hover:bg-white text-black text-xl font-bold transition-colors focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-white"
+          />
+        </div>
+      </div>
+    </section>
+  </main>
+</Draft>
