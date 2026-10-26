@@ -1,8 +1,6 @@
 # RateHub
 
-Sitio de RateHub (ratehub.com.ar): estudio de diseño y desarrollo de sitios web conectados a métricas, CRM y automatizaciones.
-
-> Estado: pre-lanzamiento. Todo el copy es un **borrador generado con IA, pendiente de revisión humana**. Los textos legales están pendientes de revisión legal (Ley 25.326). Lo que falta confirmar está marcado como `[FALTA: ...]` en el sitio.
+Sitio de RateHub (ratehub.com.ar): construimos los sistemas que tu negocio necesita — sitios web, gestión comercial (formularios, CRM, email marketing), automatización y dashboards de métricas.
 
 ## Stack
 
@@ -15,17 +13,17 @@ Sitio de RateHub (ratehub.com.ar): estudio de diseño y desarrollo de sitios web
 | Ruta | Contenido |
 |------|-----------|
 | `/` | Home (sistema visual "técnico") |
-| `/privacidad` | Política de privacidad (borrador) |
-| `/privacy` | Privacy policy, traducción al inglés (borrador) |
-| `/terminos` | Términos de uso (borrador) |
-| `/propuestas` | Direcciones visuales de trabajo, `noindex` |
+| `/privacidad` | Política de privacidad |
+| `/privacy` | Privacy policy, traducción al inglés |
+| `/terminos` | Términos de uso |
+| `/llms.txt` | Resumen del sitio para modelos de lenguaje (`public/llms.txt`) |
 
 ## Desarrollo
 
 ```bash
 npm install
 npm run dev      # http://localhost:4321
-npm run build    # genera dist/ (9 páginas)
+npm run build    # genera dist/ 
 npm run preview  # sirve dist/
 ```
 
@@ -36,6 +34,6 @@ npm run preview  # sirve dist/
 - `src/layouts/Ds.astro`: layout del sistema visual (tema claro por defecto, modo oscuro con la clase `.dark`).
 - `src/components/ds/`: navbar, hero, secciones y footer.
 - `src/styles/ds.css`: tokens de color, tipografía y botones.
-- `src/data/draft.ts`: datos compartidos (escalera de servicios, número de WhatsApp).
+- `src/data/site.ts`: datos compartidos (servicios, número de WhatsApp, mail de contacto).
 
 Reglas de contenido y de trabajo: ver `CLAUDE.md`.

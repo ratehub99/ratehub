@@ -1,9 +1,9 @@
 ---
-import { whatsappHref } from '../../data/draft';
+import { whatsappHref } from '../../data/site';
 
 const links = [
   { href: '/#conectado', label: 'Qué hacemos' },
-  { href: '/#camino', label: 'El camino' },
+  { href: '/#servicios', label: 'Servicios' },
   { href: '/#contacto', label: 'Contacto' },
 ];
 ---
@@ -23,7 +23,7 @@ const links = [
     </nav>
 
     <div class="ml-auto hidden md:flex items-center gap-4">
-      <a href="/#camino" class="text-[14px] text-fg-muted hover:text-fg transition-colors duration-150">Ver el camino</a>
+      <a href="/#servicios" class="text-[14px] text-fg-muted hover:text-fg transition-colors duration-150">Ver servicios</a>
       <a href={whatsappHref} target="_blank" rel="noopener" class="btn btn-primary btn-sm">WhatsApp</a>
     </div>
 
