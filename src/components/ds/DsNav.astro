@@ -1,5 +1,5 @@
 ---
-import { whatsappHref } from '../../data/site';
+import { whatsappLinkAttrs } from '../../lib/contact';
 
 const links = [
   { href: '/#conectado', label: 'Qué hacemos' },
@@ -24,7 +24,7 @@ const links = [
 
     <div class="ml-auto hidden md:flex items-center gap-4">
       <a href="/#servicios" class="text-[14px] text-fg-muted hover:text-fg transition-colors duration-150">Ver servicios</a>
-      <a href={whatsappHref} target="_blank" rel="noopener" class="btn btn-primary btn-sm">WhatsApp</a>
+      <a {...whatsappLinkAttrs} class="btn btn-primary btn-sm">WhatsApp</a>
     </div>
 
     <button
@@ -44,7 +44,7 @@ const links = [
   <div id="ds-menu" hidden class="md:hidden bg-bg" style="box-shadow: 0 1px 0 var(--border)">
     <nav class="px-4 py-3 flex flex-col" aria-label="Móvil">
       {links.map((l) => <a href={l.href} class="py-3 text-[16px] text-fg-muted hover:text-fg">{l.label}</a>)}
-      <a href={whatsappHref} target="_blank" rel="noopener" class="btn btn-primary my-2">Escribinos por WhatsApp</a>
+      <a {...whatsappLinkAttrs} class="btn btn-primary my-2">Escribinos por WhatsApp</a>
     </nav>
   </div>
 </header>
