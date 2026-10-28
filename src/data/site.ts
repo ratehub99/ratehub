@@ -1,10 +1,6 @@
 // Datos compartidos del sitio.
 
-export const WHATSAPP_NUMBER = '5491144169746';
-export const WHATSAPP_MESSAGE = 'Hola, quiero consultar por un sitio web para mi negocio.';
 export const CONTACT_EMAIL = 'info@ratehub.com.ar';
-
-export const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 export interface Service {
   id: string;

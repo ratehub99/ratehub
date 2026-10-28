@@ -1,5 +1,6 @@
 ---
 import LegalPage from '../components/ds/LegalPage.astro';
+import { whatsappLinkAttrs } from '../lib/contact';
 const lastUpdated = '26 de octubre de 2026';
 ---
 
@@ -65,6 +66,6 @@ const lastUpdated = '26 de octubre de 2026';
   <p>
     Podemos actualizar estos términos; la fecha de arriba indica la última versión. Escribinos a
     <a href="mailto:info@ratehub.com.ar">info@ratehub.com.ar</a> o por
-    <a href="https://wa.me/5491144169746">WhatsApp</a>.
+    <a {...whatsappLinkAttrs}>WhatsApp</a>.
   </p>
 </LegalPage>

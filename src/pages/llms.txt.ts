@@ -1,4 +1,9 @@
-# RateHub
+import type { APIRoute } from 'astro';
+import { whatsappHref } from '../lib/contact';
+
+export const GET: APIRoute = () =>
+  new Response(
+    `# RateHub
 
 > RateHub es un estudio de Argentina que construye los sistemas que un negocio necesita: sitios web, gestión comercial (formularios, CRM, email marketing), automatización de tareas y dashboards de métricas. El sitio está en español rioplatense (es-AR).
 
@@ -19,8 +24,11 @@
 ## Contacto
 
 - Mail: info@ratehub.com.ar
-- WhatsApp: https://wa.me/5491144169746
+- WhatsApp: ${whatsappHref}
 
 ## Notas
 
 - Los precios no se publican: cada proyecto se cotiza a medida a partir de una consulta.
+`,
+    { headers: { 'Content-Type': 'text/plain; charset=utf-8' } },
+  );

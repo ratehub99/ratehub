@@ -1,5 +1,6 @@
 ---
-import { services, whatsappHref, CONTACT_EMAIL } from '../../data/site';
+import { services, CONTACT_EMAIL } from '../../data/site';
+import { whatsappLinkAttrs } from '../../lib/contact';
 
 // Ilustraciones abstractas de línea fina (decorativas).
 const art: Record<string, string> = {
@@ -42,7 +43,7 @@ const art: Record<string, string> = {
   <div class="max-w-[1200px] mx-auto px-4 md:px-6 py-24 md:py-40 text-center">
     <h2 class="h2 max-w-[22ch] mx-auto reveal">Contanos de tu negocio.</h2>
     <div class="mt-10 reveal">
-      <a href={whatsappHref} target="_blank" rel="noopener" class="btn btn-primary">Escribinos por WhatsApp</a>
+      <a {...whatsappLinkAttrs} class="btn btn-primary">Escribinos por WhatsApp</a>
     </div>
     <p class="mt-6 text-fg-muted reveal">
       O por mail a <a href={`mailto:${CONTACT_EMAIL}`} class="text-fg underline underline-offset-4">{CONTACT_EMAIL}</a>
