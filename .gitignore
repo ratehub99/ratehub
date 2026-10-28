@@ -24,3 +24,6 @@ pnpm-debug.log*
 
 # Editor
 .vscode/extensions.json
+
+# vercel adapter output
+.vercel/
