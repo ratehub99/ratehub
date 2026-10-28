@@ -149,3 +149,40 @@ export async function handleContact(
 
   return { ok: true };
 }
+
+const json = (body: unknown, status: number, extra: Record<string, string> = {}) =>
+  new Response(JSON.stringify(body), {
+    status,
+    headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', ...extra },
+  });
+
+/** Capa HTTP del formulario: solo POST, mismo origen, y respuesta JSON. */
+export async function handleRequest(
+  request: Request,
+  cfg: ContactConfig,
+  doFetch: typeof fetch = fetch,
+): Promise<Response> {
+  if (request.method !== 'POST') return json({ ok: false, message: 'Método no permitido.' }, 405, { Allow: 'POST' });
+
+  // Rechaza pedidos que no vengan del propio sitio (defensa básica contra CSRF).
+  const origin = request.headers.get('origin');
+  const host = request.headers.get('x-forwarded-host') ?? request.headers.get('host');
+  if (origin) {
+    let originHost = '';
+    try { originHost = new URL(origin).host; } catch { /* origen inválido */ }
+    if (!host || originHost !== host) return json({ ok: false, message: 'Pedido no permitido.' }, 403);
+  }
+
+  let data: FormData;
+  try {
+    data = await request.formData();
+  } catch {
+    return json({ ok: false, message: 'No pudimos leer el formulario.' }, 400);
+  }
+
+  // Vercel completa x-forwarded-for con la IP del visitante.
+  const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || undefined;
+
+  const result = await handleContact(data, cfg, ip, doFetch);
+  return result.ok ? json({ ok: true }, 200) : json(result, result.status);
+}

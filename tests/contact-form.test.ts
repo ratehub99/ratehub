@@ -1,7 +1,7 @@
 // Ejecutar: node --test tests/
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { handleContact } from '../src/lib/contact-form.ts';
+import { handleContact, handleRequest } from '../src/lib/contact-form.ts';
 
 const cfg = { resendApiKey: 'k', turnstileSecret: 's', to: 'dest@example.com', from: 'web@send.example.com' };
 
@@ -92,4 +92,47 @@ test('saltos de línea en nombre/empresa no pueden inyectar encabezados', async 
   await handleContact(form({ nombre: 'Ana\r\nBcc: x@y.com', empresa: 'E\nSA' }), cfg, undefined, fn);
   const sent = JSON.parse(String(calls[1].init?.body));
   assert.ok(!/[\r\n]/.test(sent.subject));
+});
+
+const req = (method: string, body?: FormData, headers: Record<string, string> = {}) =>
+  new Request('https://ratehub.com.ar/api/contacto', {
+    method,
+    body,
+    headers: { origin: 'https://ratehub.com.ar', host: 'ratehub.com.ar', ...headers },
+  });
+
+test('HTTP: GET devuelve 405 con Allow: POST', async () => {
+  const r = await handleRequest(req('GET'), cfg);
+  assert.equal(r.status, 405);
+  assert.equal(r.headers.get('allow'), 'POST');
+});
+
+test('HTTP: origen de otro sitio devuelve 403 y no llama a la red', async () => {
+  const { fn, calls } = mockFetch(true, true);
+  const r = await handleRequest(req('POST', form(), { origin: 'https://otro-sitio.com' }), cfg, fn);
+  assert.equal(r.status, 403);
+  assert.equal(calls.length, 0);
+});
+
+test('HTTP: campos inválidos devuelve 422 con JSON de errores', async () => {
+  const r = await handleRequest(req('POST', form({ email: 'x' })), cfg);
+  assert.equal(r.status, 422);
+  const j = await r.json();
+  assert.equal(j.ok, false);
+  assert.ok(j.errors.email);
+});
+
+test('HTTP: honeypot completo devuelve 200 sin enviar', async () => {
+  const { fn, calls } = mockFetch(true, true);
+  const r = await handleRequest(req('POST', form({ website: 'spam' })), cfg, fn);
+  assert.equal(r.status, 200);
+  assert.equal(calls.length, 0);
+});
+
+test('HTTP: envío ok devuelve 200 y pasa la IP de x-forwarded-for a Turnstile', async () => {
+  const { fn, calls } = mockFetch(true, true);
+  const r = await handleRequest(req('POST', form(), { 'x-forwarded-for': '203.0.113.9, 10.0.0.1' }), cfg, fn);
+  assert.equal(r.status, 200);
+  assert.equal(calls.length, 2);
+  assert.ok(String(calls[0].init?.body).includes('remoteip=203.0.113.9'));
 });

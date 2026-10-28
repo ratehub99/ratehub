@@ -1,10 +1,8 @@
 ---
 // Formulario de contacto. Envía a /api/contacto (Resend + Turnstile).
 // Si no hay site key (producción sin configurar), no se renderiza: queda WhatsApp/email.
-import { PUBLIC_TURNSTILE_SITE_KEY } from 'astro:env/client';
-
 // Site key de prueba oficial de Cloudflare (siempre pasa): solo en desarrollo.
-const siteKey = PUBLIC_TURNSTILE_SITE_KEY || (import.meta.env.DEV ? '1x00000000000000000000AA' : undefined);
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || (import.meta.env.DEV ? '1x00000000000000000000AA' : undefined);
 ---
 
 {/* BORRADOR de copy generado con IA: pendiente de revisión humana. */}
