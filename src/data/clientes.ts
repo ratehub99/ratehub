@@ -11,6 +11,8 @@ export interface Cliente {
   logo: ImageMetadata;
   /** En producción se muestran únicamente los autorizados. */
   autorizado: boolean;
+  /** Multiplicador sobre la altura base (--logo-h). Por defecto 1. */
+  escala?: number;
   /** Fecha de autorización, formato AAAA-MM-DD (opcional). */
   fechaAutorizacion?: string;
 }
@@ -18,9 +20,9 @@ export interface Cliente {
 // Los logos se muestran en una sola tinta (negro sobre blanco, blanco sobre negro) por CSS, sin importar el color original.
 export const clientes: Cliente[] = [
   { nombre: 'Megatlon', logo: megatlon, autorizado: true },
-  { nombre: 'La Estación Fútbol y Pádel', logo: laEstacion, autorizado: true },
+  { nombre: 'La Estación Fútbol y Pádel', logo: laEstacion, escala: 1.05, autorizado: true },
   { nombre: 'Fiter', logo: fiter, autorizado: true },
-  { nombre: 'Driving Norte', logo: drivingNorte, autorizado: true },
+  { nombre: 'Driving Norte', logo: drivingNorte, escala: 1.05, autorizado: true },
   { nombre: 'Overkicks', logo: overkicks, autorizado: true },
   { nombre: 'Usana', logo: usana, autorizado: true },
 ];
