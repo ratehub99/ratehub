@@ -117,7 +117,6 @@
 .ds .logos-track { display: flex; width: max-content; animation: logos-scroll 28s linear infinite; }
 .ds .logos-strip { display: flex; flex-shrink: 0; align-items: center; justify-content: space-around; gap: 56px; padding-right: 56px; min-width: 100vw; list-style: none; margin: 0; }
 .ds .logos-strip li { flex-shrink: 0; }
-.ds .logos-strip a { display: block; }
 @keyframes logos-scroll { to { transform: translateX(-50%); } }
 /* --logo-h = altura de las letras de MEGATLON; todos los logos (recortados al borde) miden lo mismo. Misma altura para todos; una sola tinta: negro en fondo claro, blanco en fondo oscuro. */
 .ds .logo-img { display: block; height: var(--logo-h, 18px); width: auto; max-width: none; filter: brightness(0); }
