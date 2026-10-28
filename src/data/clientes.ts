@@ -3,6 +3,8 @@ import megatlon from '../assets/clientes/megatlon.svg';
 import laEstacion from '../assets/clientes/la-estacion.png';
 import fiter from '../assets/clientes/fiter.svg';
 import drivingNorte from '../assets/clientes/driving-norte.webp';
+import overkicks from '../assets/clientes/overkicks.png';
+import usana from '../assets/clientes/usana.png';
 
 export interface Cliente {
   nombre: string;
@@ -21,4 +23,6 @@ export const clientes: Cliente[] = [
   { nombre: 'La Estación Fútbol y Pádel', logo: laEstacion, url: 'https://laestacionfutbolpadel.com.ar', autorizado: true },
   { nombre: 'Fiter', logo: fiter, url: 'https://fiter.com', autorizado: true },
   { nombre: 'Driving Norte', logo: drivingNorte, url: 'https://drivingnorte.com.ar', autorizado: true },
+  { nombre: 'Overkicks', logo: overkicks, autorizado: true },
+  { nombre: 'Usana', logo: usana, autorizado: true },
 ];

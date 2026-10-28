@@ -21,10 +21,10 @@ const mode = autorizados.length > 0 ? 'logos' : showPlaceholders ? 'placeholders
                 <li>
                   {c.url ? (
                     <a href={c.url} target="_blank" rel="noopener noreferrer" aria-label={`Sitio de ${c.nombre}`} tabindex={copy === 1 ? -1 : undefined}>
-                      <Image src={c.logo} alt={copy === 1 ? '' : `Logo de ${c.nombre}`} height={64} loading="lazy" class="logo-img" />
+                      <Image src={c.logo} alt={copy === 1 ? '' : `Logo de ${c.nombre}`} height={64} loading="eager" class="logo-img" />
                     </a>
                   ) : (
-                    <Image src={c.logo} alt={copy === 1 ? '' : `Logo de ${c.nombre}`} height={64} loading="lazy" class="logo-img" />
+                    <Image src={c.logo} alt={copy === 1 ? '' : `Logo de ${c.nombre}`} height={64} loading="eager" class="logo-img" />
                   )}
                 </li>
               ))}

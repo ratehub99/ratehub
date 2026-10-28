@@ -44,6 +44,7 @@ npm run preview
 8. Sin promesas que violen políticas de plataformas (nada de review gating).
 9. Cambios de alcance o decisiones irreversibles: preguntar antes.
 10. Las referencias son inspiración de estructura; no copiar textos, imágenes ni layouts.
+11. **NUNCA ASUMIR NI SUPONER NADA.** Si falta un dato o hay ambigüedad, preguntar. Verificar cada cosa (archivos adjuntos, estado del repo, resultados) antes de darla por hecha.
 
 ## Forma de trabajo
 

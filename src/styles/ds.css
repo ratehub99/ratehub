@@ -126,15 +126,15 @@
 .ds .logo-placeholder { display: flex; align-items: center; justify-content: center; width: 160px; height: 40px; border-radius: 6px; background: #d4d4d4; color: #525252; font-size: 12px; line-height: 16px; text-align: center; }
 @media (min-width: 768px) {
   .ds .logos { -webkit-mask-image: none; mask-image: none; }
-  .ds .logos-track { width: auto; animation: none; justify-content: center; }
-  .ds .logos-strip { flex-wrap: wrap; min-width: 0; padding-right: 0; gap: 24px 56px; justify-content: center; }
+  .ds .logos-track { width: 100%; animation: none; justify-content: center; }
+  .ds .logos-strip { flex-shrink: 1; flex-wrap: wrap; min-width: 0; padding-right: 0; gap: 24px 40px; justify-content: center; }
   .ds .logos-dup { display: none; }
-  .ds .logo-img { height: 40px; }
+  .ds .logo-img { height: 36px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ds .logos-track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; }
+  .ds .logos-track { animation: none; width: 100%; justify-content: center; }
   .ds .logos-dup { display: none; }
-  .ds .logos-strip { flex-wrap: wrap; min-width: 0; padding-right: 0; justify-content: center; gap: 24px 40px; }
+  .ds .logos-strip { flex-shrink: 1; flex-wrap: wrap; min-width: 0; padding-right: 0; justify-content: center; gap: 24px 40px; }
 }
 
 /* Entrada al viewport: fade + 8px. Solo se oculta si hay JS. */
