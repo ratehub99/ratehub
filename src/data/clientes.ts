@@ -20,9 +20,9 @@ export interface Cliente {
 // Los logos se muestran en una sola tinta (negro sobre blanco, blanco sobre negro) por CSS, sin importar el color original.
 export const clientes: Cliente[] = [
   { nombre: 'Megatlon', logo: megatlon, autorizado: true },
-  { nombre: 'La Estación Fútbol y Pádel', logo: laEstacion, escala: 1.05, autorizado: true },
+  { nombre: 'La Estación Fútbol y Pádel', logo: laEstacion, escala: 1.155, autorizado: true },
   { nombre: 'Fiter', logo: fiter, autorizado: true },
-  { nombre: 'Driving Norte', logo: drivingNorte, escala: 1.05, autorizado: true },
+  { nombre: 'Driving Norte', logo: drivingNorte, escala: 1.155, autorizado: true },
   { nombre: 'Overkicks', logo: overkicks, autorizado: true },
   { nombre: 'Usana', logo: usana, autorizado: true },
 ];
