@@ -17,33 +17,33 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || (import.meta.env.DE
 
       <div class="cf-row">
         <div class="cf-field">
-          <label for="cf-nombre">Nombre <span class="cf-req">(obligatorio)</span></label>
+          <label for="cf-nombre">Nombre <span class="cf-req" aria-hidden="true">*</span></label>
           <input id="cf-nombre" name="nombre" type="text" autocomplete="given-name" maxlength="60" required aria-required="true" aria-describedby="cf-err-nombre" />
           <p id="cf-err-nombre" class="cf-error" hidden></p>
         </div>
         <div class="cf-field">
-          <label for="cf-apellido">Apellido <span class="cf-req">(obligatorio)</span></label>
+          <label for="cf-apellido">Apellido <span class="cf-req" aria-hidden="true">*</span></label>
           <input id="cf-apellido" name="apellido" type="text" autocomplete="family-name" maxlength="60" required aria-required="true" aria-describedby="cf-err-apellido" />
           <p id="cf-err-apellido" class="cf-error" hidden></p>
         </div>
       </div>
 
       <div class="cf-field">
-        <label for="cf-email">Email <span class="cf-req">(obligatorio)</span></label>
+        <label for="cf-email">Email <span class="cf-req" aria-hidden="true">*</span></label>
         <input id="cf-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required aria-required="true" aria-describedby="cf-err-email" />
         <p id="cf-err-email" class="cf-error" hidden></p>
       </div>
 
       <div class="cf-field">
-        <label for="cf-empresa">Empresa <span class="cf-req">(obligatorio)</span></label>
+        <label for="cf-empresa">Empresa <span class="cf-req" aria-hidden="true">*</span></label>
         <input id="cf-empresa" name="empresa" type="text" autocomplete="organization" maxlength="100" required aria-required="true" aria-describedby="cf-err-empresa" />
         <p id="cf-err-empresa" class="cf-error" hidden></p>
       </div>
 
       <div class="cf-field">
-        <label for="cf-mensaje">Mensaje <span class="cf-req">(obligatorio)</span></label>
+        <label for="cf-mensaje">Mensaje <span class="cf-req" aria-hidden="true">*</span></label>
         <textarea id="cf-mensaje" name="mensaje" rows="6" maxlength="2000" required aria-required="true" aria-describedby="cf-aviso cf-err-mensaje"></textarea>
-        <p id="cf-aviso" class="cf-hint">No incluyas datos de salud ni información sensible.</p>
+        <p id="cf-aviso" class="cf-hint"><em>*campo obligatorio</em></p>
         <p id="cf-err-mensaje" class="cf-error" hidden></p>
       </div>
 
@@ -57,7 +57,7 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || (import.meta.env.DE
         <input id="cf-consent" name="consentimiento" type="checkbox" required aria-required="true" aria-describedby="cf-err-consentimiento" />
         <label for="cf-consent">
           Acepto la <a href="/privacidad" target="_blank" rel="noopener noreferrer">política de privacidad<span class="sr-only"> (se abre en una pestaña nueva)</span></a>.
-          <span class="cf-req">(obligatorio)</span>
+          <span class="cf-req" aria-hidden="true">*</span>
         </label>
         <p id="cf-err-consentimiento" class="cf-error" hidden></p>
       </div>
@@ -86,12 +86,14 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || (import.meta.env.DE
   .ds .cf .cf-req { font-weight: 400; color: var(--fg-muted); }
   .ds .cf input[type='text'], .ds .cf input[type='email'], .ds .cf textarea {
     display: block; width: 100%; font: inherit; font-size: 18px; line-height: 28px; color: var(--fg);
-    background: var(--bg); border: 0; border-radius: 0; padding: 10px 14px; min-height: 48px;
-    box-shadow: 0 0 0 1px var(--border-strong);
+    background: transparent; border: 0; border-radius: 0; padding: 10px 0; min-height: 48px;
+    box-shadow: 0 1px 0 0 var(--fg-subtle); transition: box-shadow 150ms ease-out;
   }
+  /* Foco: sin recuadro; la raya inferior pasa de 1px a 2px y toma el color de texto. */
+  .ds .cf input[type='text']:focus, .ds .cf input[type='email']:focus, .ds .cf textarea:focus { outline: none; box-shadow: 0 2px 0 0 var(--fg); }
   .ds .cf textarea { resize: vertical; min-height: 144px; }
-  .ds .cf input[aria-invalid='true'], .ds .cf textarea[aria-invalid='true'] { box-shadow: 0 0 0 2px var(--cf-error); }
-  .ds .cf .cf-hint { margin-top: 6px; font-size: 16px; line-height: 24px; color: var(--fg-muted); }
+  .ds .cf input[aria-invalid='true'], .ds .cf textarea[aria-invalid='true'] { box-shadow: 0 2px 0 0 var(--cf-error); }
+  .ds .cf .cf-hint { margin-top: 10px; font-size: 16px; line-height: 24px; color: var(--fg-muted); }
   .ds .cf .cf-error { margin-top: 6px; font-size: 16px; line-height: 24px; font-weight: 500; color: var(--cf-error); }
   .ds .cf .cf-error:not([hidden])::before { content: '\26A0\00a0'; }
   .ds .cf .cf-summary { padding: 14px 16px; box-shadow: 0 0 0 2px var(--cf-error); font-size: 16px; line-height: 24px; }

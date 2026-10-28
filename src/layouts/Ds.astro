@@ -2,6 +2,7 @@
 // Layout del sistema visual "técnico".
 import '../styles/global.css';
 import '../styles/ds.css';
+import DsWhatsappFloat from '../components/ds/DsWhatsappFloat.astro';
 import geistSans from '../../node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2?url';
 import geistMono from '../../node_modules/geist/dist/fonts/geist-mono/GeistMono-Variable.woff2?url';
 
@@ -44,6 +45,7 @@ const { title, description, socialTitle, lang = 'es-AR' } = Astro.props;
   </head>
   <body class="ds">
     <slot />
+    <DsWhatsappFloat />
     <script>
       // Entrada al viewport (fade + translateY).
       const items = document.querySelectorAll('.reveal');
