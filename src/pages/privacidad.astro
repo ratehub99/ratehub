@@ -1,6 +1,6 @@
 ---
 import LegalPage from '../components/ds/LegalPage.astro';
-const lastUpdated = '26 de octubre de 2026';
+const lastUpdated = '28 de octubre de 2026';
 ---
 
 <LegalPage
@@ -19,11 +19,20 @@ const lastUpdated = '26 de octubre de 2026';
   </p>
 
   <h2>2. Qué datos tratamos</h2>
-  <p>Hoy este sitio no tiene formularios ni cuentas de usuario. Los datos que podemos recibir son:</p>
+  <p>Este sitio tiene un formulario de contacto y no tiene cuentas de usuario. Los datos que podemos recibir son:</p>
   <ul>
     <li>
       <strong>Lo que nos escribís.</strong> Si nos contactás por WhatsApp o por correo, recibimos tu nombre, tu número
       o dirección de correo y el contenido de tu mensaje.
+    </li>
+    <li>
+      <strong>El formulario de contacto.</strong> Nombre, apellido, email, empresa y mensaje, más la confirmación de que
+      aceptás esta política. Todos los campos son obligatorios. No guardamos estos envíos en ninguna base de datos: el
+      formulario los manda por email a nuestra casilla de correo.
+    </li>
+    <li>
+      <strong>Verificación anti-spam.</strong> Para evitar envíos automáticos usamos Cloudflare Turnstile, que procesa
+      datos técnicos de tu navegador y tu dirección IP para distinguir personas de robots.
     </li>
     <li>
       <strong>Datos técnicos de la visita.</strong> El servicio de hosting del sitio puede registrar datos como la
@@ -45,6 +54,7 @@ const lastUpdated = '26 de octubre de 2026';
   <h2>3. Para qué los usamos</h2>
   <ul>
     <li>Responder tu consulta y, si lo pedís, preparar una propuesta.</li>
+    <li>Proteger el formulario de contacto de envíos automáticos (spam).</li>
     <li>Mantener la seguridad y el funcionamiento del sitio.</li>
   </ul>
   <p>No vendemos tus datos ni los usamos para publicidad de terceros.</p>
@@ -53,6 +63,16 @@ const lastUpdated = '26 de octubre de 2026';
   <ul>
     <li>
       <strong>Hosting del sitio:</strong> Vercel Inc., que procesa las visitas en nuestro nombre.
+    </li>
+    <li>
+      <strong>Envío del formulario:</strong> Resend, que entrega por email el mensaje que completás en el formulario.
+    </li>
+    <li>
+      <strong>Verificación anti-spam:</strong> Cloudflare, Inc. (Turnstile).
+    </li>
+    <li>
+      <strong>Correo electrónico:</strong> Google (Google Workspace), donde recibimos y guardamos los mensajes en
+      nuestra casilla.
     </li>
     <li>
       <strong>WhatsApp (Meta):</strong> si nos escribís por ahí, la conversación se rige también por las condiciones
