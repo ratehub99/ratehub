@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets';
+import { clientes } from '../../data/clientes';
+
+// Resuelto en build. Producción: solo autorizados; si no hay ninguno, no se renderiza.
+// Preview de Vercel (y dev local) sin autorizados: 4 placeholders grises.
+const showPlaceholders = process.env.VERCEL_ENV === 'preview' || import.meta.env.DEV;
+const autorizados = clientes.filter((c) => c.autorizado);
+const mode = autorizados.length > 0 ? 'logos' : showPlaceholders ? 'placeholders' : 'none';
+---
+
+{mode !== 'none' && (
+  <div class="relative max-w-[1200px] mx-auto px-4 md:px-6 pb-12 md:pb-16">
+    <p class="eyebrow text-center mb-6">Confían en nosotros</p>
+    {mode === 'logos' ? (
+      <div class="logos">
+        <div class="logos-track">
+          {[0, 1].map((copy) => (
+            <ul class={`logos-strip${copy === 1 ? ' logos-dup' : ''}`} aria-hidden={copy === 1 ? 'true' : undefined}>
+              {autorizados.map((c) => (
+                <li>
+                  {c.url ? (
+                    <a href={c.url} target="_blank" rel="noopener noreferrer" aria-label={`Sitio de ${c.nombre}`} tabindex={copy === 1 ? -1 : undefined}>
+                      <Image src={c.logo} alt={copy === 1 ? '' : `Logo de ${c.nombre}`} height={64} loading="eager" class="logo-img" />
+                    </a>
+                  ) : (
+                    <Image src={c.logo} alt={copy === 1 ? '' : `Logo de ${c.nombre}`} height={64} loading="eager" class="logo-img" />
+                  )}
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <ul class="logos-strip logos-static" aria-hidden="true">
+        {[0, 1, 2, 3].map(() => (
+          <li><span class="logo-placeholder">[FALTA: logo autorizado]</span></li>
+        ))}
+      </ul>
+    )}
+  </div>
+)}
