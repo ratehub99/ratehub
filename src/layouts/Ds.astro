@@ -1,5 +1,5 @@
 ---
-// Layout del sistema visual "técnico". Noindex hasta que el copy tenga revisión humana.
+// Layout del sistema visual "técnico".
 import '../styles/global.css';
 import '../styles/ds.css';
 import geistSans from '../../node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2?url';
@@ -19,7 +19,6 @@ const { title, description, socialTitle, lang = 'es-AR' } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     {socialTitle && <meta property="og:title" content={socialTitle} />}
@@ -44,9 +43,6 @@ const { title, description, socialTitle, lang = 'es-AR' } = Astro.props;
     </script>
   </head>
   <body class="ds">
-    <div class="eyebrow bg-state-amber-bg text-center px-4 py-2" style="color: var(--amber-fg)">
-      Borrador · generado con IA, pendiente de revisión humana · no es el sitio final
-    </div>
     <slot />
     <script>
       // Entrada al viewport (fade + translateY).

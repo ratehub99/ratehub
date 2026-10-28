@@ -6,37 +6,37 @@ interface Tab { id: string; label: string; blurb: string; file: string; rows: Ro
 // Ilustración de cómo se conectan las piezas. No es un cliente ni tiene cifras.
 const tabs: Tab[] = [
   {
-    id: 'sitio', label: 'Sitio', blurb: 'Diseño y desarrollo, pensado para el celular.', file: 'sitio.config',
+    id: 'sitio', label: 'Sitio web', blurb: 'Diseño, desarrollo, hosting y mantenimiento.', file: 'sitio.config',
     rows: [
       { s: 'ok', k: 'diseño', v: 'adaptado a celular y escritorio' },
       { s: 'ok', k: 'contacto', v: 'botón de WhatsApp visible' },
-      { s: 'ok', k: 'textos', v: 'claros, sin jerga' },
-      { s: 'idle', k: 'medición', v: 'se conecta en la etapa 2' },
+      { s: 'ok', k: 'hosting', v: 'sitio publicado y siempre en línea' },
+      { s: 'ok', k: 'cambios', v: 'actualizaciones y mantenimiento' },
     ],
   },
   {
-    id: 'medicion', label: 'Medición', blurb: 'Saber de dónde llegan tus consultas.', file: 'medicion.log',
-    rows: [
-      { s: 'ok', k: 'evento', v: 'clic en WhatsApp → analytics' },
-      { s: 'ok', k: 'evento', v: 'envío de formulario → analytics' },
-      { s: 'ok', k: 'origen', v: 'de dónde llegó cada consulta' },
-      { s: 'warn', k: 'aviso', v: 'cookies: requiere política y aviso' },
-    ],
-  },
-  {
-    id: 'comercial', label: 'Gestión comercial', blurb: 'Cada consulta con su seguimiento.', file: 'crm.flow',
+    id: 'comercial', label: 'Gestión comercial', blurb: 'Formularios inteligentes, CRM y email marketing.', file: 'crm.flow',
     rows: [
       { s: 'ok', k: 'consulta', v: 'formulario → contacto nuevo en el CRM' },
-      { s: 'ok', k: 'etapa', v: 'nuevo · en conversación · cerrado' },
+      { s: 'ok', k: 'estado', v: 'nuevo · en conversación · cerrado' },
       { s: 'warn', k: 'pendiente', v: 'seguimiento sin responder' },
       { s: 'idle', k: 'email', v: 'secuencia de bienvenida' },
     ],
   },
   {
-    id: 'automatizacion', label: 'Automatización', blurb: 'Menos tareas manuales, más visibilidad.', file: 'automatizaciones.flow',
+    id: 'automatizacion', label: 'Automatización', blurb: 'Que las tareas repetitivas se hagan solas.', file: 'automatizaciones.flow',
     rows: [
       { s: 'ok', k: 'aviso', v: 'nueva consulta → mensaje al equipo' },
-      { s: 'ok', k: 'tarea', v: 'carga repetida → automática' },
+      { s: 'ok', k: 'datos', v: 'del formulario a tu planilla, sin copiar' },
+      { s: 'ok', k: 'recordatorio', v: 'seguimiento automático a cada contacto' },
+      { s: 'idle', k: 'reporte', v: 'resumen semanal por mail' },
+    ],
+  },
+  {
+    id: 'medicion', label: 'Medición y visibilidad', blurb: 'Dashboards de métricas.', file: 'dashboard.view',
+    rows: [
+      { s: 'ok', k: 'consultas', v: 'las que llegaron en el período' },
+      { s: 'ok', k: 'origen', v: 'de dónde llegó cada una' },
       { s: 'ok', k: 'tablero', v: 'resumen del negocio en una pantalla' },
       { s: 'idle', k: 'revisión', v: 'ajustes mensuales' },
     ],
@@ -48,25 +48,12 @@ const dot: Record<S, string> = { ok: 'var(--green)', warn: 'var(--amber)', idle:
 <section id="conectado" class="scroll-mt-16" style="box-shadow: 0 -1px 0 var(--border)">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6 py-24 md:py-40">
     <p class="eyebrow mb-6 reveal">Qué hacemos</p>
-    <h2 class="h2 max-w-[16ch] reveal">Primero el sitio. Después, todo lo demás.</h2>
-    <p class="lead max-w-[36ch] mt-6 reveal">El sitio nace conectado a tus datos, tus contactos y tus automatizaciones.</p>
+    <h2 class="h2 max-w-[16ch] reveal">Todo conectado, en un mismo lugar.</h2>
+    <p class="lead max-w-[36ch] mt-6 reveal">Tu sitio, tus contactos, tus tareas y tus métricas, funcionando juntos.</p>
 
-    <div class="mt-16 grid lg:grid-cols-12 gap-6">
-      <!-- Prueba: placeholder hasta tener un caso autorizado -->
-      <div class="lg:col-span-4 rounded-xl p-6 flex flex-col justify-between min-h-[220px] reveal" style="box-shadow: 0 0 0 1px var(--border-strong); background-image: repeating-linear-gradient(135deg, transparent 0 8px, var(--grid-line) 8px 9px)">
-        <p class="eyebrow">Prueba</p>
-        <div>
-          <p class="text-[20px] leading-7 font-medium tracking-tight">Hasta que haya un caso autorizado, la prueba es este sitio.</p>
-          <p class="mt-4">
-            <span class="inline-block rounded px-2 py-1 text-[14px] leading-5 font-medium bg-state-amber-bg" style="color: var(--amber-fg)">
-              [FALTA: caso autorizado — cliente y resultado verificable]
-            </span>
-          </p>
-        </div>
-      </div>
-
+    <div class="mt-16">
       <!-- Mockup: ventana tipo terminal -->
-      <div class="lg:col-span-8 rounded-xl bg-bg-2 hair overflow-hidden reveal">
+      <div class="rounded-xl bg-bg-2 hair overflow-hidden reveal">
         <div class="flex items-center gap-2 px-4 h-11" style="box-shadow: 0 1px 0 var(--border)">
           <span class="w-2.5 h-2.5 rounded-full hair-strong"></span>
           <span class="w-2.5 h-2.5 rounded-full hair-strong"></span>
