@@ -2,7 +2,7 @@
 import { services, CONTACT_EMAIL } from '../../data/site';
 import DsContactForm from './DsContactForm.astro';
 
-// Grilla suiza de 8 cuadrados: 4 con texto y 4 vacíos (solo la cuadrícula tenue del hero),
+// Grilla suiza de 8 cuadrados: 4 con texto y 4 vacíos (sin trama),
 // alternados en diagonal para repartir el peso visual. Solo tipografía, sin ilustraciones.
 const byId = Object.fromEntries(services.map((s) => [s.id, s]));
 // Los textos se alternan: uno arriba, uno abajo (en orden de lectura).
@@ -11,12 +11,12 @@ let nText = 0;
 const cells = [
   { type: 'text', id: 'sitio' },
   { type: 'empty' },
-  { type: 'empty' },
-  { type: 'text', id: 'medicion' },
-  { type: 'empty' },
-  { type: 'text', id: 'comercial' },
   { type: 'text', id: 'automatizacion' },
   { type: 'empty' },
+  { type: 'empty' },
+  { type: 'text', id: 'comercial' },
+  { type: 'empty' },
+  { type: 'text', id: 'medicion' },
 ] as const;
 ---
 
@@ -62,9 +62,7 @@ const cells = [
   .ds .swiss { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--border); box-shadow: 0 0 0 1px var(--border); list-style: none; padding: 0; position: relative; }
   .ds .swiss-cell { background: var(--bg); min-width: 0; }
   .ds .swiss-text { display: flex; flex-direction: column; gap: 12px; padding: 28px 24px; }
-  .ds .swiss-empty { display: none;
-    background-image: linear-gradient(to right, var(--grid-line) 1px, transparent 1px), linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-    background-size: 64px 64px; background-position: center; }
+  .ds .swiss-empty { display: none; }
   @media (min-width: 640px) {
     .ds .swiss { grid-template-columns: repeat(2, 1fr); }
     .ds .swiss-empty { display: block; }
