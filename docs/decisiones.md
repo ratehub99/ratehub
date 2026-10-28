@@ -14,3 +14,10 @@
 - **Qué:** los links a WhatsApp ya no llevan `?text=`; el chat se abre vacío (`https://wa.me/<número>`). Reemplaza el texto genérico de la decisión anterior. Se mantiene la centralización en `src/lib/contact.ts`.
 - **Por qué:** pedido del responsable: no quieren texto predeterminado cuando alguien escribe.
 - **Qué lo cambiaría:** si se quiere medir el origen de las consultas, un texto prellenado sería la forma más simple.
+
+## 2026-10-28 — Una sola sección de servicios (unifica "Qué hacemos" y "Servicios")
+- **Qué:** se eliminó la sección "Qué hacemos" (`#conectado`, mockup de terminal con pestañas). Queda una sola sección `#servicios` con 4 tarjetas, sin bajada ni chips: Sitio web, Medición y orden, Gestión comercial, Automatización y visibilidad. Menú sin "Qué hacemos"; footer y `llms.txt` actualizados; todos los links apuntan a `#servicios`.
+- **Por qué:** las dos secciones repetían los mismos 4 servicios con distinto formato. Pedido del responsable: es una descripción de lo que se ofrece, no un paso a paso, y sin bajada.
+- **Contradice al brief:** la Fase 3 pide que la escalera se vea como "camino". Se decidió lo contrario para la home: áreas de trabajo sin numeración ni orden. Se mantiene la escalera como lógica comercial interna (entrada → upsell).
+- **Qué la cambiaría:** si se quiere mostrar un recorrido (p. ej. por baja conversión a servicios 2 a 4), se vuelve a una versión con pasos.
+- **Pendiente:** copy en borrador hasta revisión humana. `[FALTA: Recurrencia (mantenimiento, hosting, retainers): qué se ofrece]`; no se muestra en el sitio. Hosting y mantenimiento se sacaron del texto de "Sitio web" y siguen nombrados en el carrusel del hero y en el footer ("Lo que construimos"); falta decidir si se mantienen.
