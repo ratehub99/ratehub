@@ -1,0 +1,252 @@
+---
+// Formulario de contacto. Envía a /api/contacto (Resend + Turnstile).
+// Si no hay site key (producción sin configurar), no se renderiza: queda WhatsApp/email.
+import { PUBLIC_TURNSTILE_SITE_KEY } from 'astro:env/client';
+
+// Site key de prueba oficial de Cloudflare (siempre pasa): solo en desarrollo.
+const siteKey = PUBLIC_TURNSTILE_SITE_KEY || (import.meta.env.DEV ? '1x00000000000000000000AA' : undefined);
+---
+
+{/* BORRADOR de copy generado con IA: pendiente de revisión humana. */}
+{siteKey && (
+  <div class="cf mx-auto mt-12 max-w-[640px] text-left reveal" data-sitekey={siteKey}>
+    <noscript>
+      <p class="cf-note">Para enviar el formulario necesitás activar JavaScript. Mientras tanto, escribinos por WhatsApp o por email.</p>
+    </noscript>
+
+    <form id="form-contacto" class="cf-js" method="post" action="/api/contacto" novalidate aria-describedby="cf-aviso">
+      <div id="cf-resumen" class="cf-summary" role="alert" tabindex="-1" hidden></div>
+
+      <div class="cf-row">
+        <div class="cf-field">
+          <label for="cf-nombre">Nombre <span class="cf-req">(obligatorio)</span></label>
+          <input id="cf-nombre" name="nombre" type="text" autocomplete="given-name" maxlength="60" required aria-required="true" aria-describedby="cf-err-nombre" />
+          <p id="cf-err-nombre" class="cf-error" hidden></p>
+        </div>
+        <div class="cf-field">
+          <label for="cf-apellido">Apellido <span class="cf-req">(obligatorio)</span></label>
+          <input id="cf-apellido" name="apellido" type="text" autocomplete="family-name" maxlength="60" required aria-required="true" aria-describedby="cf-err-apellido" />
+          <p id="cf-err-apellido" class="cf-error" hidden></p>
+        </div>
+      </div>
+
+      <div class="cf-field">
+        <label for="cf-email">Email <span class="cf-req">(obligatorio)</span></label>
+        <input id="cf-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required aria-required="true" aria-describedby="cf-err-email" />
+        <p id="cf-err-email" class="cf-error" hidden></p>
+      </div>
+
+      <div class="cf-field">
+        <label for="cf-empresa">Empresa <span class="cf-req">(obligatorio)</span></label>
+        <input id="cf-empresa" name="empresa" type="text" autocomplete="organization" maxlength="100" required aria-required="true" aria-describedby="cf-err-empresa" />
+        <p id="cf-err-empresa" class="cf-error" hidden></p>
+      </div>
+
+      <div class="cf-field">
+        <label for="cf-mensaje">Mensaje <span class="cf-req">(obligatorio)</span></label>
+        <textarea id="cf-mensaje" name="mensaje" rows="6" maxlength="2000" required aria-required="true" aria-describedby="cf-aviso cf-err-mensaje"></textarea>
+        <p id="cf-aviso" class="cf-hint">No incluyas datos de salud ni información sensible.</p>
+        <p id="cf-err-mensaje" class="cf-error" hidden></p>
+      </div>
+
+      {/* Honeypot: fuera de pantalla e inerte para teclado y lectores de pantalla. */}
+      <div class="cf-trap" inert aria-hidden="true">
+        <label for="cf-website">No completar este campo</label>
+        <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="cf-field cf-check">
+        <input id="cf-consent" name="consentimiento" type="checkbox" required aria-required="true" aria-describedby="cf-err-consentimiento" />
+        <label for="cf-consent">
+          Acepto la <a href="/privacidad" target="_blank" rel="noopener noreferrer">política de privacidad<span class="sr-only"> (se abre en una pestaña nueva)</span></a>.
+          <span class="cf-req">(obligatorio)</span>
+        </label>
+        <p id="cf-err-consentimiento" class="cf-error" hidden></p>
+      </div>
+
+      <div id="cf-turnstile" class="cf-turnstile"></div>
+
+      <button type="submit" class="btn btn-primary cf-submit">Enviar mensaje</button>
+      <p id="cf-estado" class="cf-status" role="status" aria-live="polite"></p>
+    </form>
+
+    <div id="cf-exito" class="cf-success" role="status" tabindex="-1" hidden>
+      <h3>¡Gracias por escribirnos!</h3>
+      <p>Recibimos tu mensaje y te vamos a responder por email.</p>
+    </div>
+  </div>
+)}
+
+<style is:global>
+  .ds .cf { --cf-error: #c6192a; }
+  .dark .ds .cf { --cf-error: #ff7a85; }
+  html:not(.js) .ds .cf-js { display: none; }
+  .ds .cf-row { display: grid; gap: 0 20px; }
+  @media (min-width: 640px) { .ds .cf-row { grid-template-columns: 1fr 1fr; } }
+  .ds .cf-field { margin-top: 20px; }
+  .ds .cf label { display: block; font-size: 16px; line-height: 24px; font-weight: 500; margin-bottom: 6px; }
+  .ds .cf .cf-req { font-weight: 400; color: var(--fg-muted); }
+  .ds .cf input[type='text'], .ds .cf input[type='email'], .ds .cf textarea {
+    display: block; width: 100%; font: inherit; font-size: 18px; line-height: 28px; color: var(--fg);
+    background: var(--bg); border: 0; border-radius: 0; padding: 10px 14px; min-height: 48px;
+    box-shadow: 0 0 0 1px var(--border-strong);
+  }
+  .ds .cf textarea { resize: vertical; min-height: 144px; }
+  .ds .cf input[aria-invalid='true'], .ds .cf textarea[aria-invalid='true'] { box-shadow: 0 0 0 2px var(--cf-error); }
+  .ds .cf .cf-hint { margin-top: 6px; font-size: 16px; line-height: 24px; color: var(--fg-muted); }
+  .ds .cf .cf-error { margin-top: 6px; font-size: 16px; line-height: 24px; font-weight: 500; color: var(--cf-error); }
+  .ds .cf .cf-error:not([hidden])::before { content: '\26A0\00a0'; }
+  .ds .cf .cf-summary { padding: 14px 16px; box-shadow: 0 0 0 2px var(--cf-error); font-size: 16px; line-height: 24px; }
+  .ds .cf .cf-summary ul { margin: 6px 0 0; padding-left: 20px; list-style: disc; }
+  .ds .cf .cf-summary a { color: var(--fg); text-decoration: underline; text-underline-offset: 3px; }
+  .ds .cf .cf-check { display: grid; grid-template-columns: 24px 1fr; column-gap: 12px; align-items: start; }
+  .ds .cf .cf-check input { width: 24px; height: 24px; margin: 2px 0 0; accent-color: var(--fg); }
+  .ds .cf .cf-check label { font-weight: 400; margin: 0; }
+  .ds .cf .cf-check label a { text-decoration: underline; text-underline-offset: 3px; }
+  .ds .cf .cf-check .cf-error { grid-column: 2; }
+  .ds .cf .cf-turnstile { margin-top: 20px; min-height: 65px; }
+  .ds .cf .cf-submit { margin-top: 20px; width: 100%; height: 48px; font-size: 18px; }
+  @media (min-width: 640px) { .ds .cf .cf-submit { width: auto; min-width: 220px; } }
+  .ds .cf .cf-submit[disabled] { opacity: 0.6; cursor: wait; }
+  .ds .cf .cf-status { margin-top: 12px; min-height: 24px; font-size: 16px; line-height: 24px; font-weight: 500; }
+  .ds .cf .cf-status.is-error { color: var(--cf-error); }
+  .ds .cf .cf-success { padding: 24px; box-shadow: 0 0 0 1px var(--border-strong); background: var(--bg-2); }
+  .ds .cf .cf-success h3 { font-size: 24px; line-height: 32px; font-weight: 500; letter-spacing: -0.03em; }
+  .ds .cf .cf-success p { margin-top: 8px; color: var(--fg-muted); }
+  .ds .cf .cf-note { color: var(--fg-muted); }
+  /* Honeypot: fuera de pantalla (no display:none, que algunos bots detectan). */
+  .ds .cf .cf-trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+  .ds .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+</style>
+
+<script>
+  type Errors = Record<string, string>;
+  declare global {
+    interface Window {
+      turnstile?: {
+        render: (el: string | HTMLElement, opts: Record<string, unknown>) => string;
+        reset: (id?: string) => void;
+      };
+    }
+  }
+
+  const root = document.querySelector<HTMLElement>('.cf');
+  const form = document.querySelector<HTMLFormElement>('#form-contacto');
+  if (root && form) {
+    const siteKey = root.dataset.sitekey!;
+    const resumen = document.getElementById('cf-resumen')!;
+    const estado = document.getElementById('cf-estado')!;
+    const exito = document.getElementById('cf-exito')!;
+    const boton = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const campos = ['nombre', 'apellido', 'email', 'empresa', 'mensaje', 'consentimiento'] as const;
+    const idDe = (c: string) => (c === 'consentimiento' ? 'cf-consent' : `cf-${c}`);
+    const etiquetas: Record<string, string> = {
+      nombre: 'Nombre', apellido: 'Apellido', email: 'Email', empresa: 'Empresa', mensaje: 'Mensaje', consentimiento: 'Política de privacidad',
+    };
+
+    let widgetId: string | undefined;
+    let cargando = false;
+
+    const iniciarTurnstile = () => {
+      if (widgetId !== undefined || cargando) return;
+      cargando = true;
+      const render = () => {
+        if (!window.turnstile) return;
+        widgetId = window.turnstile.render('#cf-turnstile', {
+          sitekey: siteKey,
+          theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
+          size: 'flexible',
+          'error-callback': () => mostrarEstado('No pudimos cargar la verificación. Recargá la página o escribinos por WhatsApp.', true),
+        });
+      };
+      const s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      s.async = true;
+      s.defer = true;
+      s.onload = render;
+      s.onerror = () => { cargando = false; mostrarEstado('No pudimos cargar la verificación. Revisá tu conexión o escribinos por WhatsApp.', true); };
+      document.head.appendChild(s);
+    };
+
+    // Carga Turnstile recién cuando el formulario está cerca de la pantalla (cuida la performance de la home).
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((es) => {
+        if (es.some((e) => e.isIntersecting)) { io.disconnect(); iniciarTurnstile(); }
+      }, { rootMargin: '400px 0px' });
+      io.observe(form);
+    } else {
+      iniciarTurnstile();
+    }
+    form.addEventListener('focusin', iniciarTurnstile, { once: true });
+
+    function mostrarEstado(msg: string, error = false) {
+      estado.textContent = msg;
+      estado.classList.toggle('is-error', error);
+    }
+
+    function limpiarErrores() {
+      resumen.hidden = true;
+      resumen.innerHTML = '';
+      for (const c of campos) {
+        const input = document.getElementById(idDe(c));
+        const p = document.getElementById(`cf-err-${c}`);
+        input?.removeAttribute('aria-invalid');
+        if (p) { p.hidden = true; p.textContent = ''; }
+      }
+    }
+
+    function mostrarErrores(errores: Errors) {
+      const items: string[] = [];
+      let primero: HTMLElement | null = null;
+      for (const c of campos) {
+        const msg = errores[c];
+        if (!msg) continue;
+        const input = document.getElementById(idDe(c));
+        const p = document.getElementById(`cf-err-${c}`);
+        input?.setAttribute('aria-invalid', 'true');
+        if (p) { p.textContent = msg; p.hidden = false; }
+        primero ??= input;
+        items.push(`<li><a href="#${idDe(c)}">${etiquetas[c]}</a>: ${msg.replace(/</g, '&lt;')}</li>`);
+      }
+      resumen.innerHTML = `<strong>Revisá ${items.length === 1 ? 'este campo' : 'estos campos'} para poder enviar:</strong><ul>${items.join('')}</ul>`;
+      resumen.hidden = false;
+      resumen.focus();
+      resumen.querySelectorAll<HTMLAnchorElement>('a').forEach((a) =>
+        a.addEventListener('click', (ev) => {
+          ev.preventDefault();
+          document.getElementById(a.getAttribute('href')!.slice(1))?.focus();
+        }),
+      );
+      return primero;
+    }
+
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      if (boton.disabled) return;
+      limpiarErrores();
+      mostrarEstado('');
+      boton.disabled = true;
+      boton.setAttribute('aria-busy', 'true');
+      boton.textContent = 'Enviando…';
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.ok) {
+          form.hidden = true;
+          exito.hidden = false;
+          exito.focus();
+          return;
+        }
+        if (data.errors) mostrarErrores(data.errors);
+        else mostrarEstado(data.message || 'No pudimos enviar tu mensaje. Probá de nuevo o escribinos por WhatsApp.', true);
+        if (data.code === 'turnstile' || data.code === 'send') window.turnstile?.reset(widgetId);
+      } catch {
+        mostrarEstado('No pudimos conectarnos. Revisá tu conexión e intentá de nuevo.', true);
+      } finally {
+        boton.disabled = false;
+        boton.removeAttribute('aria-busy');
+        boton.textContent = 'Enviar mensaje';
+      }
+    });
+  }
+</script>

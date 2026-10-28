@@ -1,6 +1,7 @@
 ---
 import { services, CONTACT_EMAIL } from '../../data/site';
 import { whatsappLinkAttrs } from '../../lib/contact';
+import DsContactForm from './DsContactForm.astro';
 
 // Ilustraciones abstractas de línea fina (decorativas).
 const art: Record<string, string> = {
@@ -36,7 +37,9 @@ const art: Record<string, string> = {
 <section id="contacto" class="scroll-mt-16" style="box-shadow: 0 -1px 0 var(--border)">
   <div class="max-w-[1200px] mx-auto px-4 md:px-6 py-24 md:py-40 text-center">
     <h2 class="h2 max-w-[22ch] mx-auto reveal">Contanos de tu negocio.</h2>
-    <div class="mt-10 reveal">
+    <DsContactForm />
+    <p class="mt-16 text-fg-muted reveal">También podés escribirnos directo:</p>
+    <div class="mt-4 reveal">
       <a {...whatsappLinkAttrs} class="btn btn-primary">Escribinos por WhatsApp</a>
     </div>
     <p class="mt-6 text-fg-muted reveal">
