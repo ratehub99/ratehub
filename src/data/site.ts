@@ -5,44 +5,31 @@ export const CONTACT_EMAIL = 'info@ratehub.com.ar';
 export interface Service {
   id: string;
   title: string;
-  tagline: string;
   desc: string;
-  includes: string[];
 }
 
+// BORRADOR de copy generado con IA: pendiente de revisión humana.
+// [FALTA: Recurrencia (mantenimiento, hosting, retainers): qué se ofrece. No se muestra en el sitio hasta definirlo.]
+// Son áreas de trabajo, no pasos: sin orden ni numeración.
 export const services: Service[] = [
   {
     id: 'sitio',
     title: 'Sitio web',
-    tagline: 'Diseño, desarrollo, hosting y mantenimiento.',
-    desc: 'Diseñamos y desarrollamos tu sitio para que se vea bien en el celular, se entienda rápido y la gente te contacte. Nos encargamos también del hosting y del mantenimiento para que siga funcionando y actualizado.',
-    includes: ['Diseño', 'Desarrollo', 'Hosting', 'Mantenimiento'],
+    desc: 'Diseño y desarrollo de tu sitio para que se vea bien en el celular, se entienda rápido y la gente te contacte.',
+  },
+  {
+    id: 'medicion',
+    title: 'Medición y orden',
+    desc: 'Analytics y seguimiento para saber de dónde llegan tus consultas, y tus datos organizados en un solo lugar.',
   },
   {
     id: 'comercial',
     title: 'Gestión comercial',
-    tagline: 'Formularios inteligentes, CRM y email marketing.',
-    desc: 'Que ninguna consulta se pierda. Los formularios te entregan los datos ordenados, el CRM te muestra en qué punto está cada contacto y el email marketing te ayuda a mantener la relación con tus clientes.',
-    includes: ['Formularios inteligentes', 'CRM', 'Email marketing'],
+    desc: 'Formularios conectados, CRM y email marketing, para que ninguna consulta se pierda y sepas en qué punto está cada contacto.',
   },
   {
     id: 'automatizacion',
-    title: 'Automatización',
-    tagline: 'Que las tareas repetitivas se hagan solas.',
-    desc: 'Conectamos tus herramientas para que lo que hoy hacés a mano pase solo: avisos al equipo cuando entra una consulta, datos que viajan de un sistema a otro sin copiar y pegar, mensajes y recordatorios automáticos, seguimiento de contactos y reportes que llegan listos. Menos tiempo en tareas manuales y menos errores.',
-    includes: [
-      'Avisos automáticos al equipo',
-      'Carga de datos entre sistemas',
-      'Mensajes y recordatorios',
-      'Seguimiento de contactos',
-      'Reportes periódicos',
-    ],
-  },
-  {
-    id: 'medicion',
-    title: 'Medición y visibilidad',
-    tagline: 'Dashboards de métricas.',
-    desc: 'Armamos tableros para que veas cómo viene tu negocio de un vistazo: consultas, ventas y resultados en una sola pantalla, siempre actualizados.',
-    includes: ['Dashboards de métricas'],
+    title: 'Automatización y visibilidad',
+    desc: 'Tareas repetitivas que se hacen solas, como avisos al equipo o pasar datos de un sistema a otro, y tableros para ver cómo viene tu negocio de un vistazo.',
   },
 ];
