@@ -1,15 +1,11 @@
 // Único lugar donde se define el contacto por WhatsApp.
-// Para cambiar el número o el texto prellenado, editar solo este archivo.
+// Para cambiar el número, editar solo este archivo.
 
 /** Formato internacional sin "+" ni espacios (wa.me). */
 export const WHATSAPP_NUMBER = '5491144169746';
-export const WHATSAPP_MESSAGE = 'Hola, quiero hacer una consulta.';
 
-export function whatsappUrl(message: string = WHATSAPP_MESSAGE): string {
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-}
-
-export const whatsappHref = whatsappUrl();
+/** Sin texto prellenado: el chat se abre vacío. */
+export const whatsappHref = `https://wa.me/${WHATSAPP_NUMBER}`;
 
 /** Atributos para todo <a> que abra WhatsApp: {...whatsappLinkAttrs}. */
 export const whatsappLinkAttrs = {
