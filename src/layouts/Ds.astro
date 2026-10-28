@@ -8,9 +8,10 @@ import geistMono from '../../node_modules/geist/dist/fonts/geist-mono/GeistMono-
 export interface Props {
   title: string;
   description?: string;
+  socialTitle?: string;
   lang?: string;
 }
-const { title, description, lang = 'es-AR' } = Astro.props;
+const { title, description, socialTitle, lang = 'es-AR' } = Astro.props;
 ---
 
 <!doctype html>
@@ -21,6 +22,8 @@ const { title, description, lang = 'es-AR' } = Astro.props;
     <meta name="robots" content="noindex, nofollow" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
+    {socialTitle && <meta property="og:title" content={socialTitle} />}
+    {socialTitle && <meta name="twitter:title" content={socialTitle} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preload" href={geistSans} as="font" type="font/woff2" crossorigin />
     <style set:html={`
