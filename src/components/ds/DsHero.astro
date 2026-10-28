@@ -1,16 +1,11 @@
 ---
 import { whatsappLinkAttrs } from '../../lib/contact';
-
-// Capacidades propias (no clientes). No se muestran logos de clientes sin autorización escrita.
-const items = [
-  'Diseño web', 'Hosting y mantenimiento', 'Formularios inteligentes', 'CRM',
-  'Email marketing', 'Automatizaciones', 'Dashboards de métricas',
-];
+import DsLogos from './DsLogos.astro';
 ---
 
 <section class="relative overflow-hidden">
   <div class="hero-bg absolute inset-0" aria-hidden="true"></div>
-  <div class="relative max-w-[1200px] mx-auto px-4 md:px-6 pt-24 md:pt-40 pb-20 md:pb-28 text-center">
+  <div class="relative max-w-[1200px] mx-auto px-4 md:px-6 pt-24 md:pt-40 pb-12 md:pb-16 text-center">
     <h1 class="h1 max-w-[18ch] mx-auto reveal">Construimos los sistemas que tu negocio necesita.</h1>
     <p class="lead mt-8 reveal">Sitios web, CRM, automatizaciones y más.</p>
     <div class="mt-10 flex flex-col sm:flex-row gap-3 justify-center reveal">
@@ -19,20 +14,5 @@ const items = [
     </div>
   </div>
 
-  <div class="relative pb-20 md:pb-28">
-    <p class="eyebrow text-center mb-8">Lo que construimos</p>
-    <div class="marquee" role="list" aria-label="Capacidades del estudio">
-      <div class="marquee-track">
-        {[0, 1].map((copy) => (
-          <div class="flex shrink-0" aria-hidden={copy === 1 ? 'true' : undefined}>
-            {items.map((t) => (
-              <span role={copy === 0 ? 'listitem' : undefined} class="flex items-center gap-10 pr-10 text-[20px] leading-7 font-medium tracking-tight text-fg-muted whitespace-nowrap">
-                {t}<span class="w-1 h-1 rounded-full bg-fg-subtle" aria-hidden="true"></span>
-              </span>
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
+  <DsLogos />
 </section>

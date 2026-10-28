@@ -112,22 +112,16 @@
   mask-image: linear-gradient(to bottom, #000 55%, transparent);
 }
 
-/* Marquee */
-.ds .marquee {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-}
-.ds .marquee-track { display: flex; width: max-content; animation: marquee 50s linear infinite; }
-@keyframes marquee { to { transform: translateX(-50%); } }
+/* Franja de logos: estática, con wrap. */
+.ds .logos-strip { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 24px 48px; list-style: none; margin: 0; padding: 0; }
+.ds .logo-img { height: 40px; width: auto; max-width: 160px; object-fit: contain; filter: grayscale(1); opacity: 0.75; }
+.ds .logo-placeholder { display: flex; align-items: center; justify-content: center; width: 160px; height: 40px; border-radius: 6px; background: #d4d4d4; color: #525252; font-size: 12px; line-height: 16px; text-align: center; }
 
 /* Entrada al viewport: fade + 8px. Solo se oculta si hay JS. */
 .js .ds .reveal { opacity: 0; transform: translateY(8px); transition: opacity 250ms ease-out, transform 250ms ease-out; }
 .js .ds .reveal.in { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .ds .marquee-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
-  .ds .marquee-track [aria-hidden='true'] { display: none; }
   .js .ds .reveal { opacity: 1; transform: none; transition: none; }
   .ds .btn { transition: none; }
 }
