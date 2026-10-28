@@ -115,21 +115,21 @@
 /* Franja de logos. Mobile: tirita que corre, logos uno al lado del otro. Desktop: estática, centrada, con wrap. */
 .ds .logos { overflow: hidden; -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent); }
 .ds .logos-track { display: flex; width: max-content; animation: logos-scroll 28s linear infinite; }
-.ds .logos-strip { display: flex; flex-shrink: 0; align-items: center; justify-content: space-around; gap: 40px; padding-right: 40px; min-width: 100vw; list-style: none; margin: 0; }
+.ds .logos-strip { display: flex; flex-shrink: 0; align-items: center; justify-content: space-around; gap: 56px; padding-right: 56px; min-width: 100vw; list-style: none; margin: 0; }
 .ds .logos-strip li { flex-shrink: 0; }
 .ds .logos-strip a { display: block; }
 @keyframes logos-scroll { to { transform: translateX(-50%); } }
-/* Misma altura para todos; una sola tinta: negro en fondo claro, blanco en fondo oscuro. */
-.ds .logo-img { display: block; height: 32px; width: auto; max-width: none; filter: brightness(0); }
+/* --logo-h = altura de las letras de MEGATLON; todos los logos (recortados al borde) miden lo mismo. Misma altura para todos; una sola tinta: negro en fondo claro, blanco en fondo oscuro. */
+.ds .logo-img { display: block; height: var(--logo-h, 18px); width: auto; max-width: none; filter: brightness(0); }
 .dark .ds .logo-img { filter: brightness(0) invert(1); }
 .ds .logos-static { flex-wrap: wrap; justify-content: center; min-width: 0; padding: 0; animation: none; }
 .ds .logo-placeholder { display: flex; align-items: center; justify-content: center; width: 160px; height: 40px; border-radius: 6px; background: #d4d4d4; color: #525252; font-size: 12px; line-height: 16px; text-align: center; }
 @media (min-width: 768px) {
   .ds .logos { -webkit-mask-image: none; mask-image: none; }
   .ds .logos-track { width: 100%; animation: none; justify-content: center; }
-  .ds .logos-strip { flex-shrink: 1; flex-wrap: wrap; min-width: 0; padding-right: 0; gap: 24px 40px; justify-content: center; }
+  .ds .logos-strip { flex-shrink: 1; flex-wrap: wrap; min-width: 0; padding-right: 0; gap: 24px 88px; justify-content: center; }
   .ds .logos-dup { display: none; }
-  .ds .logo-img { height: 36px; }
+  .ds .logos { --logo-h: 20px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ds .logos-track { animation: none; width: 100%; justify-content: center; }
