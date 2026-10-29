@@ -14,26 +14,26 @@ export const services: Service[] = [
   {
     id: 'sitio',
     title: 'Sitio web',
-    desc: 'Diseño y desarrollo de tu sitio para que se vea bien en el celular, se entienda rápido y la gente te contacte.',
+    desc: 'Diseño y desarrollo de tu sitio con una estética cuidada, para que se vea bien en cualquier dispositivo, explique con claridad tu propuesta y facilite que te contacten.',
   },
   {
     id: 'hosting',
     title: 'Hosting y mantenimiento',
-    desc: 'Nos ocupamos de que tu sitio esté siempre en línea y actualizado, y de resolver lo que haga falta con el tiempo.',
+    desc: 'Sitio en línea y actualizado, con soporte cuando lo necesites.',
   },
   {
     id: 'comercial',
     title: 'Gestión comercial',
-    desc: 'Formularios conectados, CRM y email marketing, para que ninguna consulta se pierda y sepas en qué punto está cada contacto.',
+    desc: 'Organización de cómo llegan y se atienden tus consultas a través de formularios conectados, CRM y email marketing, para que sepas en qué etapa está cada contacto.',
   },
   {
     id: 'automatizacion',
-    title: 'Automatización y visibilidad',
-    desc: 'Tareas repetitivas que se hacen solas, como avisos al equipo o pasar datos de un sistema a otro, y tableros para ver cómo viene tu negocio de un vistazo.',
+    title: 'Automatización y eficiencia',
+    desc: 'Automatización de tareas repetitivas para ahorrar tiempo y mejorar tus procesos.',
   },
   {
     id: 'medicion',
     title: 'Medición y orden',
-    desc: 'Analytics y seguimiento para saber de dónde llegan tus consultas, y tus datos organizados en un solo lugar.',
+    desc: 'Analytics, seguimiento y dashboards para medir tus resultados y saber de dónde llegan tus consultas, con tus datos organizados en un solo lugar.',
   },
 ];
