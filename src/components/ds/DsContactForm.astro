@@ -18,31 +18,31 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || (import.meta.env.DE
       <div class="cf-row">
         <div class="cf-field">
           <label for="cf-nombre">Nombre <span class="cf-req" aria-hidden="true">*</span></label>
-          <input id="cf-nombre" name="nombre" type="text" autocomplete="given-name" maxlength="60" required aria-required="true" aria-describedby="cf-err-nombre" />
+          <input id="cf-nombre" name="nombre" type="text" autocomplete="given-name" placeholder="Tu nombre" maxlength="60" required aria-required="true" aria-describedby="cf-err-nombre" />
           <p id="cf-err-nombre" class="cf-error" hidden></p>
         </div>
         <div class="cf-field">
           <label for="cf-apellido">Apellido <span class="cf-req" aria-hidden="true">*</span></label>
-          <input id="cf-apellido" name="apellido" type="text" autocomplete="family-name" maxlength="60" required aria-required="true" aria-describedby="cf-err-apellido" />
+          <input id="cf-apellido" name="apellido" type="text" autocomplete="family-name" placeholder="Tu apellido" maxlength="60" required aria-required="true" aria-describedby="cf-err-apellido" />
           <p id="cf-err-apellido" class="cf-error" hidden></p>
         </div>
       </div>
 
       <div class="cf-field">
         <label for="cf-email">Email <span class="cf-req" aria-hidden="true">*</span></label>
-        <input id="cf-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required aria-required="true" aria-describedby="cf-err-email" />
+        <input id="cf-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="tuemail@ejemplo.com" maxlength="254" required aria-required="true" aria-describedby="cf-err-email" />
         <p id="cf-err-email" class="cf-error" hidden></p>
       </div>
 
       <div class="cf-field">
         <label for="cf-empresa">Empresa <span class="cf-req" aria-hidden="true">*</span></label>
-        <input id="cf-empresa" name="empresa" type="text" autocomplete="organization" maxlength="100" required aria-required="true" aria-describedby="cf-err-empresa" />
+        <input id="cf-empresa" name="empresa" type="text" autocomplete="organization" placeholder="Nombre de tu empresa" maxlength="100" required aria-required="true" aria-describedby="cf-err-empresa" />
         <p id="cf-err-empresa" class="cf-error" hidden></p>
       </div>
 
       <div class="cf-field">
         <label for="cf-mensaje">Mensaje <span class="cf-req" aria-hidden="true">*</span></label>
-        <textarea id="cf-mensaje" name="mensaje" rows="6" maxlength="2000" required aria-required="true" aria-describedby="cf-aviso cf-err-mensaje"></textarea>
+        <textarea id="cf-mensaje" name="mensaje" rows="3" placeholder="Contanos qué necesitás o qué te gustaría mejorar" maxlength="2000" required aria-required="true" aria-describedby="cf-aviso cf-err-mensaje"></textarea>
         <p id="cf-aviso" class="cf-hint"><em>*campo obligatorio</em></p>
         <p id="cf-err-mensaje" class="cf-error" hidden></p>
       </div>
@@ -81,17 +81,20 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || (import.meta.env.DE
   html:not(.js) .ds .cf-js { display: none; }
   .ds .cf-row { display: grid; gap: 0 20px; }
   @media (min-width: 640px) { .ds .cf-row { grid-template-columns: 1fr 1fr; } }
-  .ds .cf-field { margin-top: 20px; }
-  .ds .cf label { display: block; font-size: 16px; line-height: 24px; font-weight: 500; margin-bottom: 6px; }
+  /* Más aire entre campos que entre rótulo y raya, para que cada título quede pegado a su campo. */
+  .ds .cf-field { margin-top: 32px; }
+  .ds .cf label { display: block; font-size: 16px; line-height: 24px; font-weight: 500; margin-bottom: 0; }
   .ds .cf .cf-req { font-weight: 400; color: var(--fg-muted); }
   .ds .cf input[type='text'], .ds .cf input[type='email'], .ds .cf textarea {
     display: block; width: 100%; font: inherit; font-size: 18px; line-height: 28px; color: var(--fg);
-    background: transparent; border: 0; border-radius: 0; padding: 10px 0; min-height: 48px;
+    background: transparent; border: 0; border-radius: 0; padding: 8px 0; min-height: 44px;
     box-shadow: 0 1px 0 0 var(--fg-subtle); transition: box-shadow 150ms ease-out;
   }
+  .ds .cf input::placeholder, .ds .cf textarea::placeholder { color: var(--fg-subtle); opacity: 0.7; }
   /* Foco: sin recuadro; la raya inferior pasa de 1px a 2px y toma el color de texto. */
   .ds .cf input[type='text']:focus, .ds .cf input[type='email']:focus, .ds .cf textarea:focus { outline: none; box-shadow: 0 2px 0 0 var(--fg); }
-  .ds .cf textarea { resize: vertical; min-height: 144px; }
+  .ds .cf textarea { resize: vertical; min-height: 96px; }
+  @media (min-width: 640px) { .ds .cf textarea { min-height: 144px; } }
   .ds .cf input[aria-invalid='true'], .ds .cf textarea[aria-invalid='true'] { box-shadow: 0 2px 0 0 var(--cf-error); }
   .ds .cf .cf-hint { margin-top: 10px; font-size: 16px; line-height: 24px; color: var(--fg-muted); }
   .ds .cf .cf-error { margin-top: 6px; font-size: 16px; line-height: 24px; font-weight: 500; color: var(--cf-error); }
