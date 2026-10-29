@@ -10,9 +10,10 @@ export const GET: APIRoute = () =>
 ## Servicios
 
 - Sitio web: diseño y desarrollo.
-- Medición y orden: analytics, seguimiento y organización de datos.
+- Hosting y mantenimiento: sitio siempre en línea y actualizado.
 - Gestión comercial: formularios conectados, CRM y email marketing.
 - Automatización y visibilidad: automatización de tareas repetitivas y dashboards de métricas.
+- Medición y orden: analytics, seguimiento y organización de datos.
 
 ## Páginas
 

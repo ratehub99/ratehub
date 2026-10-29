@@ -2,22 +2,9 @@
 import { services, CONTACT_EMAIL } from '../../data/site';
 import DsContactForm from './DsContactForm.astro';
 
-// Grilla suiza de 8 cuadrados: 4 con texto y 4 vacíos (sin trama),
-// alternados en diagonal para repartir el peso visual. Solo tipografía, sin ilustraciones.
-const byId = Object.fromEntries(services.map((s) => [s.id, s]));
-// Los textos se alternan: uno arriba, uno abajo (en orden de lectura).
-let nText = 0;
-// Orden de lectura de la grilla (4 columnas × 2 filas). 'empty' = cuadrado vacío.
-const cells = [
-  { type: 'text', id: 'sitio' },
-  { type: 'empty' },
-  { type: 'text', id: 'automatizacion' },
-  { type: 'empty' },
-  { type: 'empty' },
-  { type: 'text', id: 'comercial' },
-  { type: 'empty' },
-  { type: 'text', id: 'medicion' },
-] as const;
+// Grilla suiza de 5 columnas × 2 filas: un cuadrado con texto, uno vacío (sin trama), alternados en damero.
+// Todos los textos van alineados arriba de su cuadrado. Solo tipografía, sin ilustraciones.
+const cells = services.flatMap((s) => [{ type: 'text' as const, s }, { type: 'empty' as const }]);
 ---
 
 {/* BORRADOR de copy generado con IA: pendiente de revisión humana. Los textos viven en src/data/site.ts. */}
@@ -29,12 +16,11 @@ const cells = [
     <div class="swiss-vlines" aria-hidden="true"></div>
     <span class="swiss-hline" style="top: 0" aria-hidden="true"></span>
     <span class="swiss-hline" style="top: 50%" aria-hidden="true"></span>
-    <span class="swiss-hline" style="top: 100%" aria-hidden="true"></span>
     <ul class="swiss">
       {cells.map((c) => c.type === 'text' ? (
-        <li class={`swiss-cell swiss-text ${nText++ % 2 === 0 ? 'swiss-top' : 'swiss-bottom'}`}>
-          <h3 class="text-[24px] leading-8 font-medium tracking-[-0.03em]">{byId[c.id].title}</h3>
-          <p class="text-[16px] leading-6 text-fg-muted">{byId[c.id].desc}</p>
+        <li class="swiss-cell swiss-text">
+          <h3 class="text-[24px] leading-8 font-medium tracking-[-0.03em]">{c.s.title}</h3>
+          <p class="text-[16px] leading-6 text-fg-muted">{c.s.desc}</p>
         </li>
       ) : (
         <li class="swiss-cell swiss-empty" aria-hidden="true"></li>
@@ -67,18 +53,16 @@ const cells = [
     .ds .swiss { grid-template-columns: repeat(2, 1fr); }
     .ds .swiss-empty { display: block; }
     .ds .swiss-cell { aspect-ratio: 1; }
-    .ds .swiss-top { justify-content: flex-start; }
-    .ds .swiss-bottom { justify-content: flex-end; }
   }
   @media (min-width: 1024px) {
-    .ds .swiss { grid-template-columns: repeat(4, 1fr); gap: 0; background: none; box-shadow: none; }
+    .ds .swiss { grid-template-columns: repeat(5, 1fr); gap: 0; background: none; box-shadow: none; }
     .ds .swiss-cell { background-color: transparent; }
     .ds .swiss-text { padding: 24px 20px; }
     .ds .swiss-vlines, .ds .swiss-hline { display: block; position: absolute; pointer-events: none; }
     .ds .swiss-hline { left: 50%; width: 100vw; margin-left: -50vw; height: 1px; background: var(--border); }
     .ds .swiss-vlines {
       left: 0; right: 0; top: -56px; bottom: -120px; box-sizing: border-box; border-right: 1px solid var(--border);
-      background-image: linear-gradient(to right, var(--border) 1px, transparent 1px); background-size: 25% 100%;
+      background-image: linear-gradient(to right, var(--border) 1px, transparent 1px); background-size: 20% 100%;
       -webkit-mask-image: linear-gradient(to bottom, transparent, #000 56px, #000 calc(100% - 120px), transparent);
       mask-image: linear-gradient(to bottom, transparent, #000 56px, #000 calc(100% - 120px), transparent);
     }

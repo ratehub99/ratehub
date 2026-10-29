@@ -8,9 +8,10 @@ const cols = [
     title: 'Servicios',
     links: [
       { label: 'Sitio web', href: '/#servicios' },
-      { label: 'Medición y orden', href: '/#servicios' },
+      { label: 'Hosting y mantenimiento', href: '/#servicios' },
       { label: 'Gestión comercial', href: '/#servicios' },
       { label: 'Automatización y visibilidad', href: '/#servicios' },
+      { label: 'Medición y orden', href: '/#servicios' },
     ],
   },
   {
@@ -35,10 +36,11 @@ const cols = [
     ],
   },
 ];
+// Íconos de 16px (trazo 1.5). Solo ícono: el nombre va en aria-label y title.
 const themes = [
-  { id: 'system', label: 'Sistema' },
-  { id: 'light', label: 'Claro' },
-  { id: 'dark', label: 'Oscuro' },
+  { id: 'system', label: 'Tema del sistema', icon: '<rect x="2" y="3" width="12" height="8" rx="1"/><path d="M5.5 14h5M8 11v3"/>' },
+  { id: 'light', label: 'Tema claro', icon: '<circle cx="8" cy="8" r="2.75"/><path d="M8 1.5v1.5M8 13v1.5M1.5 8H3M13 8h1.5M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l1-1"/>' },
+  { id: 'dark', label: 'Tema oscuro', icon: '<path d="M13.5 9.5A5.5 5.5 0 0 1 6.5 2.5a5.5 5.5 0 1 0 7 7z"/>' },
 ];
 ---
 
@@ -64,9 +66,11 @@ const themes = [
     <div class="mt-16 flex flex-col md:flex-row md:items-center justify-between gap-6">
       <p class="text-[14px] leading-5 text-fg-muted">© {year} RateHub</p>
 
-      <div role="group" aria-label="Tema" class="inline-flex rounded-none p-0.5 hair self-start">
+      <div role="group" aria-label="Tema" class="ds-themes self-start">
         {themes.map((t) => (
-          <button type="button" data-theme-set={t.id} aria-pressed="false" class="ds-theme h-8 px-3 rounded-none text-[13px] font-medium text-fg-muted">{t.label}</button>
+          <button type="button" data-theme-set={t.id} aria-pressed="false" aria-label={t.label} title={t.label} class="ds-theme">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={t.icon}></svg>
+          </button>
         ))}
       </div>
     </div>
@@ -74,9 +78,10 @@ const themes = [
 </footer>
 
 <style>
-  .ds-theme { transition: background-color 150ms ease-out, color 150ms ease-out; }
+  .ds-themes { display: inline-flex; gap: 2px; padding: 3px; border-radius: 9999px; box-shadow: 0 0 0 1px var(--border-strong); }
+  .ds-theme { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 9999px; color: var(--fg-muted); transition: background-color 150ms ease-out, color 150ms ease-out; }
   .ds-theme:hover { color: var(--fg); }
-  .ds-theme[aria-pressed='true'] { background: var(--bg-2); color: var(--fg); box-shadow: 0 0 0 1px var(--border-strong); }
+  .ds-theme[aria-pressed='true'] { background: var(--fg); color: var(--bg); }
 </style>
 
 <script>
