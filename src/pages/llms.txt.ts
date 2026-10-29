@@ -5,15 +5,15 @@ export const GET: APIRoute = () =>
   new Response(
     `# RateHub
 
-> RateHub es un estudio de Argentina que construye los sistemas que un negocio necesita: sitios web, medición de datos, gestión comercial (formularios, CRM, email marketing), automatización de tareas y dashboards de métricas. El sitio está en español rioplatense (es-AR).
+> RateHub es un estudio de Argentina que construye los sistemas que un negocio necesita: sitio web, gestión comercial, automatización y medición de resultados. El sitio está en español rioplatense (es-AR).
 
 ## Servicios
 
-- Sitio web: diseño y desarrollo.
-- Hosting y mantenimiento: sitio siempre en línea y actualizado.
+- Sitio web: diseño y desarrollo de tu sitio.
+- Hosting y mantenimiento: sitio en línea y actualizado, con soporte.
 - Gestión comercial: formularios conectados, CRM y email marketing.
-- Automatización y visibilidad: automatización de tareas repetitivas y dashboards de métricas.
-- Medición y orden: analytics, seguimiento y organización de datos.
+- Automatización y eficiencia: automatización de tareas repetitivas.
+- Medición y orden: analytics, seguimiento y dashboards.
 
 ## Páginas
 
