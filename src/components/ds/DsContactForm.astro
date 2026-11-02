@@ -18,25 +18,25 @@ const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || (import.meta.env.DE
       <div class="cf-row">
         <div class="cf-field">
           <label for="cf-nombre">Nombre <span class="cf-req" aria-hidden="true">*</span></label>
-          <input id="cf-nombre" name="nombre" type="text" autocomplete="given-name" placeholder="Tu nombre" maxlength="60" required aria-required="true" aria-describedby="cf-err-nombre" />
+          <input id="cf-nombre" name="nombre" type="text" autocomplete="given-name" maxlength="60" required aria-required="true" aria-describedby="cf-err-nombre" />
           <p id="cf-err-nombre" class="cf-error" hidden></p>
         </div>
         <div class="cf-field">
           <label for="cf-apellido">Apellido <span class="cf-req" aria-hidden="true">*</span></label>
-          <input id="cf-apellido" name="apellido" type="text" autocomplete="family-name" placeholder="Tu apellido" maxlength="60" required aria-required="true" aria-describedby="cf-err-apellido" />
+          <input id="cf-apellido" name="apellido" type="text" autocomplete="family-name" maxlength="60" required aria-required="true" aria-describedby="cf-err-apellido" />
           <p id="cf-err-apellido" class="cf-error" hidden></p>
         </div>
       </div>
 
       <div class="cf-field">
         <label for="cf-email">Email <span class="cf-req" aria-hidden="true">*</span></label>
-        <input id="cf-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="tuemail@ejemplo.com" maxlength="254" required aria-required="true" aria-describedby="cf-err-email" />
+        <input id="cf-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required aria-required="true" aria-describedby="cf-err-email" />
         <p id="cf-err-email" class="cf-error" hidden></p>
       </div>
 
       <div class="cf-field">
         <label for="cf-empresa">Empresa <span class="cf-req" aria-hidden="true">*</span></label>
-        <input id="cf-empresa" name="empresa" type="text" autocomplete="organization" placeholder="Nombre de tu empresa" maxlength="100" required aria-required="true" aria-describedby="cf-err-empresa" />
+        <input id="cf-empresa" name="empresa" type="text" autocomplete="organization" maxlength="100" required aria-required="true" aria-describedby="cf-err-empresa" />
         <p id="cf-err-empresa" class="cf-error" hidden></p>
       </div>
 
